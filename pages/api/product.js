@@ -1,6 +1,5 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 
-import { sendMail } from '#/providers/Mail/Mail'
 import { createProduct } from '#/services/Products/create/createProducto'
 
 /**
