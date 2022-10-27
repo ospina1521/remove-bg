@@ -24,6 +24,7 @@ export const HomePage = () => {
       <img src="" alt="" data-testid='category-products-image'/>
       <img src="" alt="" data-testid='category-products-image'/>
       <img src="" alt="" data-testid='category-products-image'/>
+      <img src="" alt="" data-testid='category-products-image'/>
     </div>
   )
 }
