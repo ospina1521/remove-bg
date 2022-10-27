@@ -1,5 +1,6 @@
 import Head from 'next/head'
-import '../styles/globals.css'
+import '#/styles/normalize.css'
+import style from '#/styles/global.module.css'
 
 export default function MyApp ({ Component, pageProps }) {
   return (
@@ -29,9 +30,11 @@ export default function MyApp ({ Component, pageProps }) {
           sizes="32x32"
         />
         <link rel="apple-touch-icon" href="/apple-icon.png"></link>
-        <meta name="theme-color" content="#317EFB" />
+        <meta name="theme-color" content="#000000" />
       </Head>
-      <Component {...pageProps} />
+      <div className={style.box} >
+        <Component {...pageProps} />
+      </div>
     </>
   )
 }

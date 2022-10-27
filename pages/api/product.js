@@ -8,11 +8,11 @@ import { createProduct } from '#/services/Products/create/createProducto'
  */
 export default async function handler (req, res) {
   try {
-    const actions = {
-      GET: createProduct
+    const method = {
+      GET: () => createProduct({})
     }
 
-    const asd = actions[req.method]?.({})
+    const asd = await method[req.method]?.()
 
     res.status(200).json({ name: asd })
   } catch (error) {
