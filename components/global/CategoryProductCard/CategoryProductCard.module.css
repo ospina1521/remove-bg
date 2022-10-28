@@ -1,0 +1,4 @@
+.columnCard {
+    display: flex;
+    flex-direction: column;
+}

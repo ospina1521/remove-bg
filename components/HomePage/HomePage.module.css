@@ -1,0 +1,10 @@
+.rowCategories {
+    display: flex;
+    flex-direction: row;
+}
+
+.rowNewCollection{ 
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
