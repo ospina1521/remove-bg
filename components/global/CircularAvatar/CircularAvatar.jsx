@@ -1,7 +1,7 @@
-export const CircularAvatar = (props) => {
+export const CircleAvatar = (props) => {
   return (
     <svg
-      data-testid='circular-avatar'
+      data-testid='circle-avatar'
       width={31}
       height={31}
       viewBox="0 0 31 31"

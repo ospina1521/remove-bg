@@ -1,8 +1,10 @@
+import Link from 'next/link'
 import { BurgerMenu } from '../global/BurgerMenu/BurgerMenu'
 import { CategoryProductCard } from '../global/CategoryProductCard/CategoryProductCard'
-import { CircularAvatar } from '../global/CircularAvatar/CircularAvatar'
+import { CircleAvatar } from '../global/CircularAvatar/CircularAvatar'
 import { PlaceholderImage } from '../global/icons/PlaceholderImage/PlaceholderImage'
 import { Logo } from '../global/Logo/Logo'
+import { routeEnterEmailPage } from '../LoginPage/EnterEmailPage'
 import style from './HomePage.module.css'
 export const routeToHomePage = () => '/'
 
@@ -11,11 +13,13 @@ export const HomePage = () => {
     <div className={style.mainBox} >
       <header className={style.header}>
         <BurgerMenu />
-        <CircularAvatar />
+        <Link href={routeEnterEmailPage()}>
+          <a><CircleAvatar /></a>
+        </Link>
       </header>
 
       <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
-        <Logo />
+        <Logo size='m' />
       </div>
 
       <h2 className={style.textNewCollection}>Nueva Colección</h2>

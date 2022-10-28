@@ -1,12 +1,33 @@
 import style from './Logo.module.css'
+/**
+ * @param {Object} param0
+ * @param {'s' | 'm'} [param0.size]
+ * @returns
+ */
+export const Logo = ({ size = 's', ...props }) => {
+  /**
+   * @type {{[x: string]: {
+   * w: number,
+   * h: number
+   * }}}
+  */
+  const _size = {
+    s: {
+      w: 51,
+      h: 25
+    },
+    m: {
+      w: 109,
+      h: 54
+    }
+  }
 
-export const Logo = (props) => {
   return (
     <div className={style.box}>
       <svg
         data-testid='logo'
-        width={109}
-        height={54}
+        width={_size[size].w}
+        height={_size[size].h}
         viewBox="0 0 109 54"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"

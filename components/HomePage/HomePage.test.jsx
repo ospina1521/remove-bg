@@ -24,14 +24,9 @@ describe('HomePage', () => {
     screen.getByRole('heading', { name: 'SOROPA' })
   })
 
-  it('should render avatar icon', () => {
+  it('should render CircleAvatar icon', () => {
     render(<HomePage/>)
-    screen.getByTestId('circular-avatar')
-  })
-
-  it('should render avatar icon', () => {
-    render(<HomePage/>)
-    screen.getByTestId('circular-avatar')
+    screen.getByTestId('circle-avatar')
   })
 
   it('should render "Nueva Colección" text', () => {
