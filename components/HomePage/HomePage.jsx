@@ -8,7 +8,7 @@ export const routeToHomePage = () => '/'
 
 export const HomePage = () => {
   return (
-    <div className={style.paddingButton} >
+    <div className={style.mainBox} >
       <header className={style.header}>
         <BurgerMenu />
         <CircularAvatar />

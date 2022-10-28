@@ -1,8 +1,14 @@
 import Head from 'next/head'
 import '#/styles/normalize.css'
 import style from '#/styles/global.module.css'
+import { useEffect } from 'react'
 
 export default function MyApp ({ Component, pageProps }) {
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    const vh = window.innerHeight * 0.01
+    document.documentElement.style.setProperty('--vh', `${vh}px`)
+  }, [])
   return (
     <>
       <Head>
