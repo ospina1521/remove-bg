@@ -24,13 +24,13 @@ export default function MyApp ({ Component, pageProps }) {
 
         <link rel="manifest" href="/manifest.json" />
         <link
-          href="/icons/favicon-16x16.png"
+          href="/icon.svg"
           rel="icon"
           type="image/png"
           sizes="16x16"
         />
         <link
-          href="/icons/favicon-32x32.png"
+          href="/icon.svg"
           rel="icon"
           type="image/png"
           sizes="32x32"
