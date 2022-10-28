@@ -8,12 +8,17 @@ export const routeToHomePage = () => '/'
 
 export const HomePage = () => {
   return (
-    <div>
-      <BurgerMenu />
-      <Logo />
-      <CircularAvatar />
+    <div className={style.paddingButton} >
+      <header className={style.header}>
+        <BurgerMenu />
+        <CircularAvatar />
+      </header>
 
-      <h2>Nueva Colección</h2>
+      <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
+        <Logo />
+      </div>
+
+      <h2 className={style.textNewCollection}>Nueva Colección</h2>
 
       <div className={style.rowNewCollection}>
         <PlaceholderImage size='m' data-testid='new-collection-image' />

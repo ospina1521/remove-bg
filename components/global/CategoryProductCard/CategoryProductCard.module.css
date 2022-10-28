@@ -1,4 +1,12 @@
 .columnCard {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  line-height: 21px;
+  margin: 0;
+  font-weight: lighter;
+  font-size: 14px;
+  margin-left: 4px;
 }
