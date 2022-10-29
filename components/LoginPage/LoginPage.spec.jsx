@@ -21,11 +21,16 @@ describe('Login Page', () => {
 
   it('EnterEmailPage should render CircleAvatar', () => {
     render(<EnterEmailPage />)
-    screen.getByTestId('circle-avatar')
+    screen.getByTestId('circle-avatar-large')
   })
 
   it('EnterEmailPage should render input from email', () => {
     render(<EnterEmailPage />)
     screen.getByRole('textbox')
+  })
+
+  it('EnterEmailPage should render button submit', () => {
+    render(<EnterEmailPage />)
+    screen.getByRole('button')
   })
 })

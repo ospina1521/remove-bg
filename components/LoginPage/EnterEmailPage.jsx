@@ -1,5 +1,5 @@
 import { BurgerMenu } from '../global/BurgerMenu/BurgerMenu'
-import { CircleAvatar } from '../global/CircularAvatar/CircularAvatar'
+import { CircleAvatarLarge } from '../global/CircleAvatar/CircleAvatarLarge'
 import { Logo } from '../global/Logo/Logo'
 import style from './Login.module.css'
 export const routeEnterEmailPage = () => '/login/email'
@@ -7,14 +7,16 @@ export const routeEnterEmailPage = () => '/login/email'
 export const EnterEmailPage = () => {
   return (
     <div className={style.mainBox}>
-      <header>
+      <header className={style.header} >
         <BurgerMenu/>
         <Logo />
       </header>
 
-      <CircleAvatar />
+      <CircleAvatarLarge className={style.circleAvatarLarge} />
 
-      <input type="email" />
+      <input type="email" className={style.input} placeholder='ejemplo@gmail.com' />
+
+      <button type='submit' className={style.button} >Entrar</button>
     </div>
   )
 }

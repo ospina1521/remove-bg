@@ -42,7 +42,6 @@ export const Logo = ({ size = 's', ...props }) => {
           fill="#000"
         />
       </svg>
-      <h1 className={style.name} >SOROPA</h1>
     </div>
 
   )

@@ -41,6 +41,7 @@
 }
 
 * {
+  box-sizing: border-box;
   font-family:
     "Roboto Condensed",
     -apple-system,
@@ -114,7 +115,7 @@ h1 {
    */
 
 hr {
-  box-sizing: content-box;
+  box-sizing: border-box;
 
   /* 1 */
   height: 0;
@@ -257,6 +258,8 @@ textarea {
   margin: 0;
 
   /* 2 */
+  all: unset;
+  box-sizing: border-box;
 }
 
 /**
