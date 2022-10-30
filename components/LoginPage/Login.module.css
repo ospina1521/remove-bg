@@ -30,6 +30,7 @@
 }
 
 .button {
+  margin: 0 auto;
   width: 112px;
   font-size: 12px;
   font-weight: 600;

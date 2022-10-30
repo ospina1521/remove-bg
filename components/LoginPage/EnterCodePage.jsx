@@ -1,28 +1,22 @@
-import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
-import { BurgerMenu } from '../global/BurgerMenu/BurgerMenu'
 import { CircleAvatarLarge } from '../global/CircleAvatar/CircleAvatarLarge'
 import { BackArrowIcon } from '../global/icons/BackArrow/BackArrow'
 import { Logo } from '../global/Logo/Logo'
-import { routeEnterCodePage } from './EnterCodePage'
 import style from './Login.module.css'
-import { enterEmailService } from './provider/enterEmail.service'
-export const routeEnterEmailPage = () => '/login/email'
+export const routeEnterCodePage = () => '/login/code'
 
-export const EnterEmailPage = () => {
+export const EnterCodePage = () => {
   const route = useRouter()
-  const [email, setEmail] = useState('')
+  const [code, setCode] = useState('')
 
   /**
-   * @param { import('react').FormEvent<HTMLFormElement | HTMLButtonElement>} [e]
+   * @param { import('react').FormEvent<HTMLFormElement>} [e]
    */
   const submitHandler = (e) => {
     e?.preventDefault()
-
-    enterEmailService(email)
-    route.push(routeEnterCodePage())
   }
+
   return (
     <div className={style.mainBox}>
       <header className={style.header} >
@@ -34,14 +28,15 @@ export const EnterEmailPage = () => {
 
       <CircleAvatarLarge className={style.circleAvatarLarge} />
 
-      <form onSubmit={submitHandler}>
+      <form onSubmit={(e) => submitHandler(e)} >
         <input
           required
-          type="email"
+          type="tel"
           className={style.input}
-          placeholder='ejemplo@gmail.com'
+          placeholder='000 000'
+          pattern='(\w| ){7}'
           onChange={(e) => {
-            setEmail(e.currentTarget.value)
+            setCode(e.currentTarget.value)
           }}
         />
 

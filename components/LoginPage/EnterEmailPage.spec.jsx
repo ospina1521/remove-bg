@@ -2,34 +2,34 @@ import { cleanup, render, screen } from '@testing-library/react'
 import { beforeEach, describe, it } from 'vitest'
 import { EnterEmailPage } from './EnterEmailPage'
 
-describe('Login Page', () => {
+describe('EnterEmailPage', () => {
   beforeEach(cleanup)
 
-  it('should render EnterEmailPage', () => {
+  it('should render', () => {
     render(<EnterEmailPage />)
   })
 
-  it('EnterEmailPage should render BurgerMenu', () => {
+  it(' should render BurgerMenu', () => {
     render(<EnterEmailPage />)
-    screen.getByTestId('burgerMenu')
+    screen.getByTestId('backArrowIcon')
   })
 
-  it('EnterEmailPage should render Logo', () => {
+  it(' should render Logo', () => {
     render(<EnterEmailPage />)
     screen.getByTestId('logo')
   })
 
-  it('EnterEmailPage should render CircleAvatar', () => {
+  it(' should render CircleAvatar', () => {
     render(<EnterEmailPage />)
     screen.getByTestId('circle-avatar-large')
   })
 
-  it('EnterEmailPage should render input from email', () => {
+  it(' should render input from email', () => {
     render(<EnterEmailPage />)
     screen.getByRole('textbox')
   })
 
-  it('EnterEmailPage should render button submit', () => {
+  it(' should render button submit', () => {
     render(<EnterEmailPage />)
     screen.getByRole('button')
   })

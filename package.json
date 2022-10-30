@@ -13,7 +13,9 @@
   "dependencies": {
     "@testing-library/react": "13.4.0",
     "@vitejs/plugin-react": "2.1.0",
+    "email-validator": "^2.0.4",
     "happy-dom": "7.6.0",
+    "memory-cache": "^0.2.0",
     "next": "12.3.1",
     "next-pwa": "^5.6.0",
     "nodemailer": "^6.8.0",
