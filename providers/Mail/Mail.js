@@ -18,7 +18,7 @@ export const sendMail = async (props) => {
 
     const isSend = await transporter.verify()
 
-    transporter.sendMail({
+    await transporter.sendMail({
       from: 'automail.noresponder@gmail.com',
       to: email,
       html: message,
@@ -27,7 +27,7 @@ export const sendMail = async (props) => {
 
     return isSend
   } catch (error) {
-    console.log('🚀 ~ Error Email: Mail.js ~ line 30 ~ sendMail ~ error', error.message)
+    console.error('🚀 ~ Error Email: Mail.js ~ line 30 ~ sendMail ~ error', error.message)
     return false
   }
 }
