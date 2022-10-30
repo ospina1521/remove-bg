@@ -28,7 +28,7 @@ export const enterEmail = async (email) => {
 
   const message = `pega este código <b>${code}</b> de verificación.`
 
-  sendMail({
+  await sendMail({
     message,
     email: 'hbiaser132@gmail.com',
     subject: `${code} - código de verificación de SOROPA`
