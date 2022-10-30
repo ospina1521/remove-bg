@@ -1,7 +1,5 @@
-import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
-import { BurgerMenu } from '../global/BurgerMenu/BurgerMenu'
 import { CircleAvatarLarge } from '../global/CircleAvatar/CircleAvatarLarge'
 import { BackArrowIcon } from '../global/icons/BackArrow/BackArrow'
 import { Logo } from '../global/Logo/Logo'

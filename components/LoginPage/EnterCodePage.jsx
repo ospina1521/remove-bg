@@ -15,6 +15,7 @@ export const EnterCodePage = () => {
    */
   const submitHandler = (e) => {
     e?.preventDefault()
+    console.log(code)
   }
 
   return (
