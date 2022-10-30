@@ -15,7 +15,6 @@ export default async function handler (req, res) {
 
   try {
     await method[req.method]?.()
-    // await enterEmail(email)
 
     res.send({})
   } catch (error) {
