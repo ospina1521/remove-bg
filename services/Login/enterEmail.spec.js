@@ -7,11 +7,11 @@ describe('EnterEmail API', () => {
   })
 
   it('should throw if email parameter is not provided', () => {
-  // // @ts-ignore
-  //   expect(() => enterEmail())
-  //     .rejects
-  //     .toThrow('Email parameter is required')
-  // })
+    // // @ts-ignore
+    // expect(() => enterEmail())
+    //   .rejects
+    //   .toThrow('Email parameter is required')
+  })
 
   // it.concurrent('should throw if email parameter is 123', () => {
   //   expect(() => enterEmail('123'))
