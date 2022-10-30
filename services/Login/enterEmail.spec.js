@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { enterEmail } from './EnterEmail'
+import { enterEmail } from './enterEmail'
 
 describe('EnterEmail API', () => {
   it('should be a function', () => {
