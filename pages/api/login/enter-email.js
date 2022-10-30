@@ -1,6 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 
-import { enterEmail } from '#/services/Login/EnterEmail'
+import { enterEmail } from '#/services/Login/enterEmail'
 
 /**
  * @param {import('next').NextApiRequest} req
