@@ -6,7 +6,7 @@ import memoryCache from 'memory-cache'
 /**
  * @param {string} email
  */
-export const enterEmail = async (email) => {
+export const enterEmailController = async (email) => {
   if (!email) throw new Error('Email parameter is required')
 
   const isEmailValid = validate(email)
