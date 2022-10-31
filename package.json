@@ -6,8 +6,7 @@
     "test": "vitest",
     "coverage": "vitest run --coverage",
     "dev": "next dev",
-    "build:dev": "next build",
-    "build": "npm run coverage && npm run build:dev",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
