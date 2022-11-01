@@ -15,7 +15,10 @@ describe('enterEmailController', () => {
       requestPatcher: (req) => (req.headers = { key: process.env.SPECIAL_TOKEN }),
       test: async ({ fetch }) => {
         const res = await fetch({ method: 'POST', body: 'data' })
-        await expect(res.json()).resolves.toStrictEqual({ error: 'Email parameter is required' }) // ◄ Passes!
+        const json = await res.json()
+
+        expect(json).toStrictEqual({ error: 'Email parameter is required' }) // ◄ Passes!
+        expect(res.status).toBe(401)
       }
     })
   })
