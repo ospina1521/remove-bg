@@ -5,7 +5,7 @@ import { BackArrowIcon } from '../global/icons/BackArrow/BackArrow'
 import { Logo } from '../global/Logo/Logo'
 import { routeEnterCodePage } from './EnterCodePage'
 import style from './Login.module.css'
-import { enterEmailService } from './provider/enterEmail.service'
+import { enterEmailService } from './provider/enterEmail.front.service'
 export const routeEnterEmailPage = () => '/login/email'
 
 export const EnterEmailPage = () => {

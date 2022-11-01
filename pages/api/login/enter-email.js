@@ -1,16 +1,16 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 
-import { enterEmailController } from '#/controller/Login/enterEmail.controller'
+import { enterEmailBackService } from '#/service/Login/enterEmail.back.service'
 
 /**
  * @param {import('next').NextApiRequest} req
  * @param {import('next').NextApiResponse} res
  */
-export default async function handler (req, res) {
+export default async function EnterEmailController (req, res) {
   const { email } = req.body || {}
 
   const method = {
-    POST: () => enterEmailController(email)
+    POST: () => enterEmailBackService(email)
   }
 
   try {

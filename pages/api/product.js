@@ -1,6 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 
-import { createProduct } from '#/controller/Products/create/createProducto'
+import { createProduct } from '#/service/Products/create/createProducto'
 
 /**
  * @param {import('next').NextApiRequest} req

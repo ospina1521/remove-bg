@@ -6,4 +6,4 @@ export interface CreateUserRepositoryInterface {
 
 export type CreateUserRepositoryType = (props: CreateUserRepositoryInterface) => Promise<boolean>
 
-export type GetByEmailUserRepositoryType = (email: string) => Promise<Array<CreateUserRepositoryInterface>>
+export type GetByEmailUserRepositoryType = (email: string) => Promise<null | CreateUserRepositoryInterface>

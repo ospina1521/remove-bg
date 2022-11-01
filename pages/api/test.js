@@ -11,9 +11,11 @@ export default async function handler (req, res) {
   try {
     if (typeof email !== 'string') throw new Error('Email should be a string')
 
-    const abc = await new UserRepositorySupaBase().getByEmail(email)
+    const user = await new UserRepositorySupaBase().getByEmail(email)
 
-    res.status(200).json({ abc })
+    if (!user) throw new Error("User from email don't exist")
+
+    res.status(200).json({ user })
   } catch (e) {
     res.status(400).json({ error: e.message })
   }

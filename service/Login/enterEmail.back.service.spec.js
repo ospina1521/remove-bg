@@ -1,38 +1,38 @@
 import { describe, expect, it } from 'vitest'
-import { enterEmailController } from './enterEmail.controller'
+import { enterEmailBackService } from './enterEmail.back.service'
 
 describe('EnterEmail API', () => {
   it('should be a function', () => {
-    expect(enterEmailController).toBeTypeOf('function')
+    expect(enterEmailBackService).toBeTypeOf('function')
   })
 
   it('should throw if email parameter is not provided', () => {
     // @ts-ignore
-    expect(() => enterEmailController())
+    expect(() => enterEmailBackService())
       .rejects
       .toThrow('Email parameter is required')
   })
 
   it.concurrent('should throw if email parameter is 123', () => {
-    expect(() => enterEmailController('123'))
+    expect(() => enterEmailBackService('123'))
       .rejects
       .toThrow('Email parameter is not valid')
   })
 
   it.concurrent('should throw if email parameter is 123@', () => {
-    expect(() => enterEmailController('123@'))
+    expect(() => enterEmailBackService('123@'))
       .rejects
       .toThrow('Email parameter is not valid')
   })
 
   it.concurrent('should throw if email parameter is abc@abc', () => {
-    expect(() => enterEmailController('abc@abc'))
+    expect(() => enterEmailBackService('abc@abc'))
       .rejects
       .toThrow('Email parameter is not valid')
   })
 
   it.concurrent('should throw if email parameter is abc@abc.c', () => {
-    expect(() => enterEmailController('abc@abc.c'))
+    expect(() => enterEmailBackService('abc@abc.c'))
       .rejects
       .toThrow('Email parameter is not valid')
   })

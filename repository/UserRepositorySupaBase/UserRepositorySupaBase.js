@@ -6,9 +6,7 @@ export class UserRepositorySupaBase {
   /** @type {import('./types').CreateUserRepositoryType} */
   create = async (props) => {
     const { name, email, urlPhoto } = props || {}
-
-    if (!name) throw new Error('name param is required')
-    if (!email) throw new Error('email param is required')
+    if (!name || !email) throw new Error('name and email param is required')
 
     const { status } = await supabase
       .from(this.tableNameUser)
@@ -30,6 +28,6 @@ export class UserRepositorySupaBase {
       .select()
       .eq('email', email)
 
-    return data ?? []
+    return data?.[0]
   }
 }
