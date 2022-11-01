@@ -9,7 +9,10 @@ export default async function handler (req, res) {
   const { email = '' } = req.query || {}
 
   try {
+    if (typeof email !== 'string') throw new Error('Email should be a string')
+
     const abc = await new UserRepositorySupaBase().getByEmail(email)
+
     res.status(200).json({ abc })
   } catch (e) {
     res.status(400).json({ error: e.message })
