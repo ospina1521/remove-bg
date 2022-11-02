@@ -146,7 +146,9 @@ describe.concurrent('EnterCodeController', () => {
 
         // @ts-ignore
         const resp = await fetch(config)
+        console.log('🚀 ~ file: enter-code.spec.js ~ line 149 ~ test: ~ resp', resp)
         const { error, token } = await resp.json() ?? {}
+        console.log('🚀 ~ file: enter-code.spec.js ~ line 151 ~ test: ~ error', { error, token })
 
         expect(resp.status).toBe(200)
         expect(error).toBe(null)
