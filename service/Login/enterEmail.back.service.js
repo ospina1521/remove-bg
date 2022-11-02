@@ -1,3 +1,4 @@
+import { credentials } from '#/credentials'
 import { sendMail } from '#/providers/Mail/Mail'
 import { UserRepositorySupaBase } from '#/repository/UserRepositorySupaBase/UserRepositorySupaBase'
 import { generateCode7D } from '#/utils/generateCode7D'
@@ -36,7 +37,5 @@ export const enterEmailBackService = async (email) => {
 
   // El código solo debe ser visible en modo desarrollo y en modo de pruebas
   // con la finalidad de que los test unitarios pasen exitosamente
-  const canSendCode = process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test'
-
-  return canSendCode ? code : null
+  return credentials.isDev ? code : null
 }

@@ -2,6 +2,7 @@ import EnterEmailController from '.'
 import { describe, expect, it } from 'vitest'
 import { testApiHandler } from 'next-test-api-route-handler'
 import { validate } from '#/utils/validate'
+import { credentials } from '#/credentials'
 
 describe.concurrent('EnterEmailController', () => {
   it('should to throw if request body not exist', async () => {
@@ -66,7 +67,7 @@ describe.concurrent('EnterEmailController', () => {
     })
   })
 
-  it.runIf(process.env.NODE_ENV === 'test')('should be status 200 and "error: null and code: ... ..." if request is success', async () => {
+  it.runIf(credentials.isDev)('should be status 200 and "error: null and code: ... ..." if request is success', async () => {
     await testApiHandler({
       handler: EnterEmailController,
       test: async ({ fetch }) => {
@@ -95,7 +96,7 @@ describe.concurrent('EnterEmailController', () => {
     })
   })
 
-  it.runIf(process.env.NODE_ENV !== 'test')('only prod -> should be status 200 and "error: null and code: null" if request is success', async () => {
+  it.runIf(!credentials.isDev)('only prod -> should be status 200 and "error: null and code: null" if request is success', async () => {
     await testApiHandler({
       handler: EnterEmailController,
       test: async ({ fetch }) => {
@@ -118,7 +119,7 @@ describe.concurrent('EnterEmailController', () => {
     })
   })
 
-  it.runIf(process.env.NODE_ENV === 'test')('should be status 200 and "error: null" if request is success', async () => {
+  it.runIf(credentials.isDev)('should be status 200 and "error: null" if request is success', async () => {
     await testApiHandler({
       handler: EnterEmailController,
       test: async ({ fetch }) => {

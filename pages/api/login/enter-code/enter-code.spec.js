@@ -1,3 +1,4 @@
+import { credentials } from '#/credentials'
 import { testApiHandler } from 'next-test-api-route-handler'
 import { describe, expect, it } from 'vitest'
 import EnterCodeController from '.'
@@ -110,7 +111,7 @@ describe.concurrent('EnterCodeController', () => {
     })
   })
 
-  it.skipIf(process.env.NODE_ENV !== 'test')('should be status 200 and return code if request is success', async () => {
+  it.runIf(credentials.isDev)('should be status 200 and return code if request is success', async () => {
     let code = ''
 
     await testApiHandler({
