@@ -9,14 +9,14 @@ import { enterEmailBackService } from '#/service/Login/enterEmail.back.service'
 export default async function EnterEmailController (req, res) {
   const { email } = req.body || {}
 
-  const method = {
+  const services = {
     POST: () => enterEmailBackService(email)
   }
 
   try {
-    await method[req.method]?.()
+    const code = (await services[req.method]()) ?? null
 
-    res.send({})
+    res.status(200).json({ error: null, code })
   } catch (error) {
     res.status(400).json({ error: error.message })
   }

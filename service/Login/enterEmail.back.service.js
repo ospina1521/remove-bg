@@ -20,14 +20,9 @@ export const enterEmailBackService = async (email) => {
 
   const code = generateCode7D()
 
-  const saveCache = JSON.stringify({
-    code,
-    cacheEmail: email
-  })
-
   memoryCache.put(
-    'codeNumberWithFormat',
-    saveCache,
+    `codeNumberWithFormat${email}`,
+    code,
     5 /** 5 min */ * 60 /** 1 min */ * 1000 /** 1 seg */
   )
 
@@ -38,4 +33,10 @@ export const enterEmailBackService = async (email) => {
     message,
     subject: `${code} - código de verificación de SOROPA`
   })
+
+  // El código solo debe ser visible en modo desarrollo y en modo de pruebas
+  // con la finalidad de que los test unitarios pasen exitosamente
+  const canSendCode = process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test'
+
+  return canSendCode ? code : null
 }

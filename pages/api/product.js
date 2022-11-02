@@ -16,7 +16,6 @@ export default async function handler (req, res) {
 
     res.status(200).json({ name: asd })
   } catch (error) {
-    console.log('🚀 ~ file: product.js ~ line 21 ~ handler ~ error', error.message)
     res.status(200).json({ error: error.message })
   }
 }

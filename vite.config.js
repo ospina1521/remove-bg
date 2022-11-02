@@ -5,6 +5,8 @@ import { config } from 'dotenv'
 
 config()
 
+console.log({ env: process.env.NODE_ENV })
+
 export default defineConfig({
   plugins: [react()],
   resolve: {
