@@ -7,6 +7,7 @@
     "coverage:prod": "vitest run --coverage --mode=prod",
     "coverage:test": "vitest run --coverage",
     "coverage": "npm run coverage:prod && npm run coverage:test",
+    "gpush": "npm run coverage && git push",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",

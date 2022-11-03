@@ -4,7 +4,7 @@ import { CategoryProductCard } from '../global/CategoryProductCard/CategoryProdu
 import { CircleAvatar } from '../global/CircleAvatar/CircleAvatar'
 import { PlaceholderImage } from '../global/icons/PlaceholderImage/PlaceholderImage'
 import { Logo } from '../global/Logo/Logo'
-import { routeEnterEmailPage } from '../LoginPage/EnterEmailPage'
+import { routeEnterEmailPage } from '../LoginPage/EnterEmail/EnterEmailPage'
 import style from './HomePage.module.css'
 export const routeToHomePage = () => '/'
 
