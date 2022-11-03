@@ -2,7 +2,7 @@ import { cleanup, render, screen } from '@testing-library/react'
 import { beforeEach, describe, it } from 'vitest'
 import { EnterCodePage } from './EnterCodePage'
 
-describe('EnterCodePage', () => {
+describe.concurrent('EnterCodePage', () => {
   beforeEach(cleanup)
 
   it('should render', () => {

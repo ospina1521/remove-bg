@@ -2,7 +2,7 @@ import { cleanup, render, screen } from '@testing-library/react'
 import { afterEach, describe, expect, it } from 'vitest'
 import { HomePage } from './HomePage'
 
-describe('HomePage', () => {
+describe.concurrent('HomePage', () => {
   afterEach(cleanup)
 
   it('should render', () => {

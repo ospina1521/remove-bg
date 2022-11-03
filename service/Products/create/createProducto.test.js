@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { createProduct } from './createProducto'
 
-describe('createProduct', () => {
+describe.concurrent('createProduct', () => {
   it('should be a function', () => {
     expect(createProduct).toBeTypeOf('function')
   })

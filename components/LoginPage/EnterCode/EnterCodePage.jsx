@@ -6,6 +6,7 @@ import { Logo } from '../../global/Logo/Logo'
 import style from '../Login.module.css'
 import { enterCodeService } from './provider/enterCode.front.service'
 import { setCookie } from '#/utils/cookies'
+import { routeDashboardPage } from '#/components/Dashboard/Dashboard'
 
 /** @param {string} email */
 export const routeEnterCodePage = (email) => `/login/code?email=${email}`
@@ -25,6 +26,7 @@ export const EnterCodePage = () => {
       const { token } = await enterCodeService({ code, email })
 
       setCookie({ key: 'token', value: token, days: 10000 })
+      route.push(routeDashboardPage())
     } catch (error) {
       console.error('🚀 ~ Error Service: EnterCodePage.jsx ~ line 26 ~ submitHandler ~ error', error.message)
     }

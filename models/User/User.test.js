@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { validateUser } from './User'
 
-describe('User Model', () => {
+describe.concurrent('User Model', () => {
   it('should be function', () => {
     expect(validateUser).toBeTypeOf('function')
   })

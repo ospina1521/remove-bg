@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import '#/styles/normalize.css'
-import style from '#/styles/global.module.css'
+import '#/styles/global.css'
+
 import { useEffect } from 'react'
 
 export default function MyApp ({ Component, pageProps }) {
@@ -38,7 +39,7 @@ export default function MyApp ({ Component, pageProps }) {
         <link rel="apple-touch-icon" href="/apple-icon.png"></link>
         <meta name="theme-color" content="#000000" />
       </Head>
-      <div className={style.box} >
+      <div className='appBox' >
         <Component {...pageProps} />
       </div>
     </>

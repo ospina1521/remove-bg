@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { enterEmailBackService } from './enterEmail.back.service'
 
-describe('EnterEmail API', () => {
+describe.concurrent('EnterEmail API', () => {
   it('should be a function', () => {
     expect(enterEmailBackService).toBeTypeOf('function')
   })
