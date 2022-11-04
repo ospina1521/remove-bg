@@ -1,4 +1,4 @@
-import { DashboardPage } from '#/components/Dashboard/Dashboard'
+import { DashboardPage } from '#/components/DashboardPage/DashboardPage'
 import { cleanup, render, screen } from '@testing-library/react'
 import { beforeEach, describe, expect, it } from 'vitest'
 
@@ -17,16 +17,18 @@ describe.concurrent('dashboard', () => {
 
   it('should render image of user', () => {
     render(<DashboardPage />)
-    screen.getByRole('img')
+    screen.getByTestId('fill-circle-avatar')
   })
 
   it.each([
-    'MI PERFIL',
-    'GESTIÓN DE PROVEEDORES',
-    'NUEVOS PRODUCTOS',
-    'ANÁLISIS DE MÉTRICAS'
+    { text: 'MI PERFIL', icon: null },
+    { text: 'GESTIÓN DE PROVEEDORES', icon: 'icon-notification' },
+    { text: 'NUEVOS PRODUCTOS', icon: 'icon-chart' },
+    { text: 'ANÁLISIS DE MÉTRICAS', icon: 'icon-bell' }
   ])('should render bottom "%s"', (props) => {
+    const { icon, text } = props
     render(<DashboardPage />)
-    screen.getByText(props)
+    screen.getByText(text)
+    icon && screen.getByTestId(icon)
   })
 })

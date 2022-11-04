@@ -1,4 +1,6 @@
-import Link from 'next/link'
+import { getCookie } from '#/utils/cookies'
+import { useRouter } from 'next/router'
+import { routeDashboardPage } from '../DashboardPage/DashboardPage'
 import { BurgerMenu } from '../global/BurgerMenu/BurgerMenu'
 import { CategoryProductCard } from '../global/CategoryProductCard/CategoryProductCard'
 import { CircleAvatar } from '../global/CircleAvatar/CircleAvatar'
@@ -9,13 +11,19 @@ import style from './HomePage.module.css'
 export const routeToHomePage = () => '/'
 
 export const HomePage = () => {
+  const router = useRouter()
+
+  const onClickHandler = () => {
+    const token = getCookie('token')
+    if (!token) return router.push(routeEnterEmailPage())
+    return router.push(routeDashboardPage())
+  }
+
   return (
     <div className={style.mainBox} >
       <header className={style.header}>
         <BurgerMenu />
-        <Link href={routeEnterEmailPage()}>
-          <a><CircleAvatar /></a>
-        </Link>
+        <CircleAvatar onClick={onClickHandler} />
       </header>
 
       <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>

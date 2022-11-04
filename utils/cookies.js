@@ -7,9 +7,9 @@
 export function setCookie ({ key, value, days }) {
   if (typeof window === 'undefined') return
 
-  if (!days) throw new Error('days param is required')
-  if (!key) throw new Error('key param is required')
-  if (!value) throw new Error('value param is required')
+  if (!days) throw new Error('setCookie - days param is required')
+  if (!key) throw new Error('setCookie - key param is required')
+  if (!value) throw new Error('setCookie - value param is required')
 
   const date = new Date()
   date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000))
@@ -20,14 +20,18 @@ export function setCookie ({ key, value, days }) {
 
 /**  @param {string} key */
 export function getCookie (key) {
-  if (typeof window === 'undefined') return
-  if (!key) throw new Error('key param is required')
+  try {
+    if (typeof window === 'undefined') return
+    if (!key) throw new Error('key param is required')
 
-  const ca = document.cookie.split(';')
+    const ca = document.cookie.split(';')
 
-  const [, value] = ca
-    .find(e => e.trim().split('=')[0] === key)
-    ?.split('=') ?? []
+    const [, value] = ca
+      .find(e => e.trim().split('=')[0] === key)
+      ?.split('=') ?? []
 
-  return JSON.parse(value ?? "Cookie don't exist")
+    return JSON.parse(value)
+  } catch (error) {
+    console.error('🚀 ~ Parser Error: cookies.js ~ line 36 ~ getCookie ~ error: ', '"Cookie don\'t exist"')
+  }
 }
