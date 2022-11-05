@@ -48,3 +48,7 @@ input::placeholder .button {
   background: red;
   color: red !important;
 }
+
+.button:active {
+  color: #811d1d;
+}

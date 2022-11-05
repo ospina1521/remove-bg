@@ -4,6 +4,7 @@ import { FillCircleAvatar } from '../global/CircleAvatar/FillCircleAvatar'
 import { BellIcon } from '../global/icons/BellIcon'
 import { ChartIcon } from '../global/icons/ChartIcon/ChartIcon'
 import { NotificationIcon } from '../global/icons/NotificationIcon/NotificationIcon'
+import { OutLineButton } from '../global/OutLineButton/OutLineButton'
 import style from './DashboardPage.module.css'
 
 export const routeDashboardPage = () => '/dashboard'
@@ -22,13 +23,13 @@ export function DashboardPage () {
         <div className={style.row}>
           <FillCircleAvatar />
 
-          <button className={style.button}>MI PERFIL</button>
+          <OutLineButton text='MI PERFIL'/>
         </div>
 
         <div className={style.column} >
-          <button className={style.button}> <NotificationIcon/> GESTIÓN DE PROVEEDORES</button>
-          <button className={style.button}> <ChartIcon/> NUEVOS PRODUCTOS</button>
-          <button className={style.button}> <BellIcon/> ANÁLISIS DE MÉTRICAS</button>
+          <OutLineButton icon={<NotificationIcon/>} text='GESTIÓN DE PROVEEDORES'/>
+          <OutLineButton icon={<ChartIcon/>} text='NUEVOS PRODUCTOS'/>
+          <OutLineButton icon={<BellIcon/>} text='ANÁLISIS DE MÉTRICAS'/>
         </div>
       </div>
     </div>

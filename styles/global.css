@@ -11,3 +11,10 @@
   display: flex;
   flex-direction: column;
 }
+
+@media (prefers-color-scheme: dark) {
+  .next-error-h1,
+  .next-error-h1 ~ div {
+    color: #000;
+  }
+}

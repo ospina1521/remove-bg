@@ -24,7 +24,6 @@ export const EnterCodePage = () => {
       if (typeof email !== 'string') throw new Error('Email to be string')
 
       const { token } = await enterCodeService({ code, email })
-      console.log('🚀 ~ file: EnterCodePage.jsx ~ line 27 ~ submitHandler ~ token', token)
 
       setCookie({ key: 'token', value: token, days: 10000 })
 
@@ -63,7 +62,7 @@ export const EnterCodePage = () => {
         />
 
         <button type="submit" className={style.button}>
-          Entrar
+          Verificar
         </button>
       </form>
     </div>

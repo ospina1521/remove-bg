@@ -16,9 +16,8 @@ export const getToken = (payload) => {
 
 /**
  * @param {string} token
- * @return {Payload}
  */
 export const verifyToken = (token) => {
   // @ts-ignore
-  return jwt.verify(token, process.env.JWT_SIGN).payload
+  return jwt.verify(token, process.env.JWT_SIGN)
 }

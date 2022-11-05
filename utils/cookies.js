@@ -3,28 +3,37 @@
  * @param {string} param0.key
  * @param {any} param0.value
  * @param {number} param0.days
+ * @param {string | undefined | null} [param0.context]
  */
-export function setCookie ({ key, value, days }) {
-  if (typeof window === 'undefined') return
-
-  if (!days) throw new Error('setCookie - days param is required')
-  if (!key) throw new Error('setCookie - key param is required')
-  if (!value) throw new Error('setCookie - value param is required')
+export function setCookie ({ key, value, days, context }) {
+  if (days === null || days === undefined) throw new Error('setCookie - days param is required')
+  if (key === null || key === undefined) throw new Error('setCookie - key param is required')
+  if (value === null || value === undefined) throw new Error('setCookie - value param is required')
+  if ((context === null || context === undefined) && !window) throw new Error('setCookie - context param is required in server side')
 
   const date = new Date()
   date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000))
 
   const expires = '; expires=' + date.toUTCString()
-  document.cookie = key + '=' + JSON.stringify(value) + expires + '; path=/'
+
+  let cookie = context ?? document?.cookie ?? ''
+  cookie = key + '=' + JSON.stringify(value) + expires + '; path=/'
+  if (typeof window !== 'undefined') document.cookie = cookie
+
+  return cookie
 }
 
-/**  @param {string} key */
-export function getCookie (key) {
+/**
+ * @param {string} key
+ * @param {string} [context]
+ * */
+export function getCookie (key, context) {
   try {
-    if (typeof window === 'undefined') return
+    const cookie = context ?? document?.cookie
+
     if (!key) throw new Error('key param is required')
 
-    const ca = document.cookie.split(';')
+    const ca = cookie.split(';')
 
     const [, value] = ca
       .find(e => e.trim().split('=')[0] === key)
