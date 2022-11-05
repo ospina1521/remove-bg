@@ -10,6 +10,7 @@ import { validate as emailValidator } from 'email-validator'
  */
 export default async function EnterCodeController (req, res) {
   const { code, email } = req.body || {}
+  console.log('🚀 ~ file: index.js ~ line 13 ~ EnterCodeController ~ req', req.body)
 
   try {
     if (!code) throw new Error('Code parameter is required')
