@@ -31,7 +31,7 @@ export const EnterCodePage = () => {
 
       setCookie({ key: 'token', value: token, days: 10000 })
 
-      route.push(routeDashboardPage())
+      await route.push(routeDashboardPage())
       setIsLoading(false)
     } catch (error) {
       setIsLoading(false)
