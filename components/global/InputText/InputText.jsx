@@ -33,13 +33,11 @@ export function InputText (props) {
     placeholder = '',
     autoComplete = 'off',
     isDisable = false,
-    onChange = () => {},
-    onSubmit = () => {}
+    onChange = () => {}
   } = props
 
   const [activate, setActivate] = useState(false)
   const [data, setData] = useState('')
-  const [_isValid, setIsValid] = useState(isValid)
 
   const getClassNameInput = () => {
     if (!isValid) { return `${Style.BoxInput_input}  ${Style.BoxInput_inputError}` }
@@ -89,7 +87,6 @@ export function InputText (props) {
             stringToValidate: value
           })
 
-          setIsValid(tempIsValid)
           setData(value)
 
           onChange && onChange(value, tempIsValid, e.nativeEvent.data)

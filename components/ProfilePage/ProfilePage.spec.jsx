@@ -42,6 +42,6 @@ describe.concurrent('ProfilePage', () => {
     'número de celular'
   ])('should render input %s', (props) => {
     render(<ProfilePage />)
-    screen.getByPlaceholderText(props)
+    screen.getByLabelText(props)
   })
 })

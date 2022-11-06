@@ -1,3 +1,5 @@
+import { delay } from '#/utils/delay'
+import { useState } from 'react'
 import { FillCircleAvatar } from '../global/CircleAvatar/FillCircleAvatar'
 import { Header } from '../global/Header/Header'
 import { ImagePicker } from '../global/ImagePicker/ImagePicker'
@@ -8,12 +10,30 @@ import style from './Profile.module.css'
 export const routeProfilePage = () => '/profile'
 
 export const ProfilePage = () => {
+  const [isLoading, setIsLoading] = useState(false)
+
+  /** @param {import('react').FormEvent<HTMLFormElement>} e */
+  const onSubmit = async (e) => {
+    e?.preventDefault()
+    setIsLoading(true)
+
+    await delay(1000)
+    try {
+      // -> send data
+
+      //
+      setIsLoading(false)
+    } catch (error) {
+      setIsLoading(false)
+    }
+  }
+
   return (
     <>
-      <Loading />
+      {isLoading && <Loading />}
       <Header />
 
-      <div className={style.body}>
+      <form className={style.body} onSubmit={onSubmit}>
 
         <div className={style.row}>
           <ImagePicker className={style.img} imageBuilder={(props) => {
@@ -34,7 +54,7 @@ export const ProfilePage = () => {
         <InputText type='text' placeholder='Franken@Luna.com' name='correo electrónico' isDisable={true} />
         <InputText type='text' placeholder='300 000 00 00' name='número de celular' />
 
-      </div>
+      </form>
     </>
   )
 }

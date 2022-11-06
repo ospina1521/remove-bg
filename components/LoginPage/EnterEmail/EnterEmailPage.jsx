@@ -1,6 +1,6 @@
+import { Button } from '#/components/global/Button/Button'
 import { Header } from '#/components/global/Header/Header'
 import { Loading } from '#/components/global/Loading/Loading'
-import { delay } from '#/utils/delay'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { CircleAvatarLarge } from '../../global/CircleAvatar/CircleAvatarLarge'
@@ -20,7 +20,6 @@ export const EnterEmailPage = () => {
 
     e?.preventDefault()
 
-    await delay(1000)
     try {
       route.push(routeEnterCodePage(email))
       await enterEmailService(email)
@@ -50,7 +49,7 @@ export const EnterEmailPage = () => {
           }}
         />
 
-        <button type='submit' className={style.button}>Entrar</button>
+        <Button text='Entrar' type='submit' />
       </form>
 
     </div>

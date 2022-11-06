@@ -7,7 +7,7 @@ import { setCookie } from '#/utils/cookies'
 import { routeDashboardPage } from '#/components/DashboardPage/DashboardPage'
 import { Header } from '#/components/global/Header/Header'
 import { Loading } from '#/components/global/Loading/Loading'
-import { delay } from '#/utils/delay'
+import { Button } from '#/components/global/Button/Button'
 
 /** @param {string} email */
 export const routeEnterCodePage = (email) => `/login/code?email=${email}`
@@ -32,7 +32,6 @@ export const EnterCodePage = () => {
       setCookie({ key: 'token', value: token, days: 10000 })
 
       route.push(routeDashboardPage())
-      await delay(1000)
       setIsLoading(false)
     } catch (error) {
       setIsLoading(false)
@@ -66,9 +65,7 @@ export const EnterCodePage = () => {
           }}
         />
 
-        <button type="submit" className={style.button}>
-          Verificar
-        </button>
+        <Button text='Verificar' type='submit' />
       </form>
     </div>
   )
