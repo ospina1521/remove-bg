@@ -9,7 +9,7 @@ export const OutLineButton = (props) => {
   const { icon = <></>, text = '' } = props
 
   return (
-    <a className={style.button}>
+    <div className={style.button}>
       <span>{icon}</span>
       <p>{text}</p>
       <svg
@@ -25,6 +25,6 @@ export const OutLineButton = (props) => {
           fill="#000"
         />
       </svg>
-    </a>
+    </div>
   )
 }

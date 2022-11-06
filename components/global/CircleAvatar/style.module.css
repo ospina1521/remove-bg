@@ -1,0 +1,11 @@
+.img {
+  height: 125px;
+  width: 125px;
+  position: relative;
+}
+
+.isEditable {
+  position: absolute;
+  bottom: 0;
+  right: 4px;
+}

@@ -2,6 +2,8 @@ import { DashboardPage } from '#/components/DashboardPage/DashboardPage'
 import { getCookie, setCookie } from '#/utils/cookies'
 import { verifyToken } from '#/utils/jsonWebToken'
 
+export default DashboardPage
+
 /** @type {import('next').GetServerSideProps} */
 export async function getServerSideProps (context) {
   try {
@@ -32,5 +34,3 @@ export async function getServerSideProps (context) {
     }
   }
 }
-
-export default function Dashboard () { return <DashboardPage /> }

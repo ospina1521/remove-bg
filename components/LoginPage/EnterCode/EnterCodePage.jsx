@@ -1,12 +1,13 @@
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { CircleAvatarLarge } from '../../global/CircleAvatar/CircleAvatarLarge'
-import { BackArrowIcon } from '../../global/icons/BackArrow/BackArrow'
-import { Logo } from '../../global/Logo/Logo'
 import style from '../Login.module.css'
 import { enterCodeService } from './provider/enterCode.front.service'
 import { setCookie } from '#/utils/cookies'
 import { routeDashboardPage } from '#/components/DashboardPage/DashboardPage'
+import { Header } from '#/components/global/Header/Header'
+import { Loading } from '#/components/global/Loading/Loading'
+import { delay } from '#/utils/delay'
 
 /** @param {string} email */
 export const routeEnterCodePage = (email) => `/login/code?email=${email}`
@@ -15,9 +16,12 @@ export const EnterCodePage = () => {
   const route = useRouter()
   const { email } = route?.query ?? {}
   const [code, setCode] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
 
   /** @param { import('react').FormEvent<HTMLFormElement>} e */
   const submitHandler = async (e) => {
+    setIsLoading(true)
+
     e?.preventDefault()
 
     try {
@@ -28,17 +32,18 @@ export const EnterCodePage = () => {
       setCookie({ key: 'token', value: token, days: 10000 })
 
       route.push(routeDashboardPage())
+      await delay(1000)
+      setIsLoading(false)
     } catch (error) {
+      setIsLoading(false)
       console.error('🚀 ~ Error Service: EnterCodePage.jsx ~ line 26 ~ submitHandler ~ error', error.message)
     }
   }
 
   return (
     <div className={style.mainBox}>
-      <header className={style.header}>
-        <BackArrowIcon onClick={() => route.back()} />
-        <Logo />
-      </header>
+      {isLoading && <Loading />}
+      <Header />
 
       <CircleAvatarLarge className={style.circleAvatarLarge} />
 

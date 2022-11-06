@@ -1,10 +1,12 @@
 import { BurgerMenu } from '#/components/global/BurgerMenu/BurgerMenu'
 import { Logo } from '#/components/global/Logo/Logo'
+import Link from 'next/link'
 import { FillCircleAvatar } from '../global/CircleAvatar/FillCircleAvatar'
 import { BellIcon } from '../global/icons/BellIcon'
 import { ChartIcon } from '../global/icons/ChartIcon/ChartIcon'
 import { NotificationIcon } from '../global/icons/NotificationIcon/NotificationIcon'
 import { OutLineButton } from '../global/OutLineButton/OutLineButton'
+import { routeProfilePage } from '../ProfilePage/ProfilePage'
 import style from './DashboardPage.module.css'
 
 export const routeDashboardPage = () => '/dashboard'
@@ -23,7 +25,9 @@ export function DashboardPage () {
         <div className={style.row}>
           <FillCircleAvatar />
 
-          <OutLineButton text='MI PERFIL'/>
+          <Link href={routeProfilePage()}>
+            <a style={{ width: '100%', marginTop: 'auto' }} ><OutLineButton text='MI PERFIL'/></a>
+          </Link>
         </div>
 
         <div className={style.column} >

@@ -7,15 +7,6 @@
   width: 100%;
 }
 
-.header {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  padding: 40px 24px;
-  padding-bottom: 104px;
-  justify-content: space-between;
-}
-
 .circleAvatarLarge {
   margin-bottom: 22px;
 }
@@ -50,5 +41,5 @@ input::placeholder .button {
 }
 
 .button:active {
-  color: #811d1d;
+  color: var(--primary-color);
 }

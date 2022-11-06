@@ -1,8 +1,9 @@
+import { Header } from '#/components/global/Header/Header'
+import { Loading } from '#/components/global/Loading/Loading'
+import { delay } from '#/utils/delay'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { CircleAvatarLarge } from '../../global/CircleAvatar/CircleAvatarLarge'
-import { BackArrowIcon } from '../../global/icons/BackArrow/BackArrow'
-import { Logo } from '../../global/Logo/Logo'
 import { routeEnterCodePage } from '../EnterCode/EnterCodePage'
 import style from '../Login.module.css'
 import { enterEmailService } from './provider/enterEmail.front.service'
@@ -11,27 +12,30 @@ export const routeEnterEmailPage = () => '/login/email'
 export const EnterEmailPage = () => {
   const route = useRouter()
   const [email, setEmail] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
 
   /** @param { import('react').FormEvent<HTMLFormElement | HTMLButtonElement>} e */
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
+    setIsLoading(true)
+
     e?.preventDefault()
 
+    await delay(1000)
     try {
-      enterEmailService(email)
       route.push(routeEnterCodePage(email))
+      await enterEmailService(email)
+      setIsLoading(false)
     } catch (error) {
+      setIsLoading(false)
       console.error('🚀 ~ Error Service: EnterEmailPage.jsx ~ line 24 ~ submitHandler ~ error', error.message)
     }
   }
 
   return (
     <div className={style.mainBox}>
-      <header className={style.header} >
-        <BackArrowIcon
-          onClick={() => route.back()}
-        />
-        <Logo />
-      </header>
+      {isLoading && <Loading />}
+
+      <Header />
 
       <CircleAvatarLarge className={style.circleAvatarLarge} />
 

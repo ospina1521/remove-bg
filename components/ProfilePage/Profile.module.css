@@ -1,0 +1,30 @@
+.body {
+  display: flex;
+  flex-direction: column;
+  padding: 40px 38px;
+  gap: 8px;
+}
+
+.row {
+  display: flex;
+  width: 100%;
+  gap: 8px;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  margin-top: auto;
+  width: 100%;
+  flex: 1;
+  gap: 8px;
+}
+
+.img {
+  width: 125px;
+  height: 125px;
+  border-radius: 100px;
+  background: #fff;
+
+  /* height: 26px; */
+}

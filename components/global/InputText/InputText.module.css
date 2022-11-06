@@ -1,0 +1,49 @@
+.BoxInput {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+}
+
+.BoxInput_input {
+  width: 100%;
+  padding-bottom: 8px;
+  padding-left: 4px;
+  height: 30px;
+  color: #000;
+  border-bottom: 1px solid #000;
+  transition: border-bottom 0.3s ease;
+}
+
+.BoxInput_inputActivate {
+  border-bottom: 1px solid green;
+}
+
+.BoxInput_inputError {
+  border-bottom: 1px solid red;
+}
+
+.BoxInput_input::placeholder {
+  color: transparent;
+  transition: color 0.3s ease;
+}
+
+.BoxInput_input:focus::placeholder {
+  color: #0006;
+  transition: color 0.3s ease;
+}
+
+.BoxInput_label {
+  position: relative;
+  color: #000;
+  line-height: 16px;
+  bottom: -15px;
+  margin-left: 8px;
+  font-size: 16px;
+  transition: bottom 0.3s ease, font-size 0.3s ease;
+}
+
+.BoxInput_labelActivate {
+  font-size: 12px;
+  color: #000;
+  bottom: -2px;
+}
