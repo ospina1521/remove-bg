@@ -1,24 +1,50 @@
-import { BurgerMenu } from '#/components/global/BurgerMenu/BurgerMenu'
-import { Logo } from '#/components/global/Logo/Logo'
 import Link from 'next/link'
 import { FillCircleAvatar } from '../global/CircleAvatar/FillCircleAvatar'
+import { Header } from '../global/Header/Header'
 import { BellIcon } from '../global/icons/BellIcon'
+import { CartIcon } from '../global/icons/CartIcon/CartIcon'
 import { ChartIcon } from '../global/icons/ChartIcon/ChartIcon'
 import { NotificationIcon } from '../global/icons/NotificationIcon/NotificationIcon'
+import { ProductIcon } from '../global/icons/ProductIcon'
 import { OutLineButton } from '../global/OutLineButton/OutLineButton'
 import { routeProfilePage } from '../ProfilePage/ProfilePage'
 import style from './DashboardPage.module.css'
 
 export const routeDashboardPage = () => '/dashboard'
 
-export function DashboardPage () {
+/** @param  {import('#/utils/jsonWebToken').Payload} props */
+export function DashboardPage (props) {
+  const { rol } = props
+
+  const AdminOptions = () => {
+    return (
+      <div className={style.column} >
+        <OutLineButton icon={<NotificationIcon/>} text='GESTIÓN DE PROVEEDORES'/>
+        <OutLineButton icon={<ChartIcon/>} text='NUEVOS PRODUCTOS'/>
+        <OutLineButton icon={<BellIcon/>} text='ANÁLISIS DE MÉTRICAS'/>
+      </div>
+    )
+  }
+
+  const ProviderOptions = () => {
+    return (
+      <div className={style.column} >
+        <OutLineButton icon={<CartIcon />} text='MI PORTAFOLIO'/>
+        <OutLineButton icon={<ProductIcon />} text='FICHA DE PRODUCTO'/>
+      </div>
+    )
+  }
+
+  const Options = () => {
+    if (rol === 'admin') return <AdminOptions />
+    if (rol === 'provider') return <ProviderOptions />
+    return <h1>Opciones no definidas para el rol</h1>
+  }
+
   return (
     <div className='mainBox'>
 
-      <div className={style.header}>
-        <BurgerMenu />
-        <Logo />
-      </div>
+      <Header burgerMenuEnable={true} arrowBackEnable={false} />
 
       <div className={style.body}>
 
@@ -30,11 +56,7 @@ export function DashboardPage () {
           </Link>
         </div>
 
-        <div className={style.column} >
-          <OutLineButton icon={<NotificationIcon/>} text='GESTIÓN DE PROVEEDORES'/>
-          <OutLineButton icon={<ChartIcon/>} text='NUEVOS PRODUCTOS'/>
-          <OutLineButton icon={<BellIcon/>} text='ANÁLISIS DE MÉTRICAS'/>
-        </div>
+        <Options />
       </div>
     </div>
   )

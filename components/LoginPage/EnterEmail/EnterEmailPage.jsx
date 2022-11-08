@@ -49,7 +49,7 @@ export const EnterEmailPage = () => {
           }}
         />
 
-        <Button text='Entrar' type='submit' />
+        <Button text='Enviar' type='submit' />
       </form>
 
     </div>

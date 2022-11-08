@@ -1,4 +1,6 @@
+import { getCookie } from '#/utils/cookies'
 import { delay } from '#/utils/delay'
+import { decodeToken } from '#/utils/jsonWebToken'
 import { useState } from 'react'
 import { FillCircleAvatar } from '../global/CircleAvatar/FillCircleAvatar'
 import { Header } from '../global/Header/Header'
@@ -11,6 +13,10 @@ export const routeProfilePage = () => '/profile'
 
 export const ProfilePage = () => {
   const [isLoading, setIsLoading] = useState(false)
+
+  const token = getCookie('token')
+
+  const { email } = decodeToken(token)
 
   /** @param {import('react').FormEvent<HTMLFormElement>} e */
   const onSubmit = async (e) => {
@@ -51,7 +57,7 @@ export const ProfilePage = () => {
         </div>
 
         <InputText type='text' placeholder='mengano' name='representante legal' />
-        <InputText type='text' placeholder='Franken@Luna.com' name='correo electrónico' isDisable={true} />
+        <InputText type='text' value={email} placeholder='Franken@Luna.com' name='correo electrónico' isDisable={true} />
         <InputText type='text' placeholder='300 000 00 00' name='número de celular' />
 
       </form>

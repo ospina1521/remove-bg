@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router'
+import { BurgerMenu } from '../BurgerMenu/BurgerMenu'
 import { BackArrowIcon } from '../icons/BackArrow/BackArrow'
 import { Logo } from '../Logo/Logo'
 import style from './Header.module.css'
@@ -6,15 +7,19 @@ import style from './Header.module.css'
 /**
  * @param {Object} props
  * @param {Object} [props.arrowBackEnable]
+ * @param {string} [props.title]
+ * @param {boolean} [props.burgerMenuEnable]
  */
 export const Header = (props) => {
-  const { arrowBackEnable = true } = props
+  const { arrowBackEnable = true, burgerMenuEnable = false, title = 'PANEL' } = props
 
   const router = useRouter()
   return (
     <header className={style.header}>
-      <BackArrowIcon onClick={() => router.back()} />
-      <span>{arrowBackEnable && <Logo />}</span>
+      {arrowBackEnable && <BackArrowIcon onClick={() => router.back()} />}
+      {burgerMenuEnable && <BurgerMenu onClick={() => router.back()} />}
+      <p>{title}</p>
+      <span><Logo /></span>
     </header>
   )
 }

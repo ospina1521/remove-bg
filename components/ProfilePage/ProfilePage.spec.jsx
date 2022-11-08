@@ -1,9 +1,17 @@
+import { setCookie } from '#/utils/cookies'
 import { cleanup, render, screen } from '@testing-library/react'
 import { beforeEach, describe, expect, it } from 'vitest'
 import { ProfilePage } from './ProfilePage'
 
 describe.concurrent('ProfilePage', () => {
-  beforeEach(cleanup)
+  beforeEach(() => {
+    cleanup()
+    setCookie({
+      key: 'token',
+      value: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1hbnVlbGxvbmRvZ25vMTMyQGdtYWlsLmNvbSIsInJvbCI6InByb3ZpZGVyIiwiaWF0IjoxNjY3NzYwMDQ2fQ.3aLKfaWFkKD4oNz3tRRChgCMonPVeIp-ZDT-EYgLsd4',
+      days: 1000
+    })
+  })
 
   it('should be a function', () => {
     expect(ProfilePage).toBeTypeOf('function')

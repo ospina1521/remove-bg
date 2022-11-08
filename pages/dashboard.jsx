@@ -1,6 +1,6 @@
 import { DashboardPage } from '#/components/DashboardPage/DashboardPage'
 import { getCookie, setCookie } from '#/utils/cookies'
-import { verifyToken } from '#/utils/jsonWebToken'
+import { decodeToken, verifyToken } from '#/utils/jsonWebToken'
 
 export default DashboardPage
 
@@ -17,8 +17,10 @@ export async function getServerSideProps (context) {
 
     verifyToken(token)
 
+    const info = decodeToken(token)
+
     return {
-      props: {}
+      props: info
     }
   } catch (error) {
     context.res.setHeader('set-cookie', setCookie({

@@ -10,13 +10,13 @@ describe.concurrent('dashboard', () => {
   })
 
   it('should render logo and burger menu', () => {
-    render(<DashboardPage />)
+    render(<DashboardPage email='hbiaser132@gmail.com' rol='admin' />)
     screen.getByTestId('logo')
     screen.getByTestId('burgerMenu')
   })
 
   it('should render image of user', () => {
-    render(<DashboardPage />)
+    render(<DashboardPage email='hbiaser132@gmail.com' rol='admin' />)
     screen.getByTestId('fill-circle-avatar')
   })
 
@@ -25,9 +25,20 @@ describe.concurrent('dashboard', () => {
     { text: 'GESTIÓN DE PROVEEDORES', icon: 'icon-notification' },
     { text: 'NUEVOS PRODUCTOS', icon: 'icon-chart' },
     { text: 'ANÁLISIS DE MÉTRICAS', icon: 'icon-bell' }
-  ])('should render bottom "%s"', (props) => {
+  ])('should render bottom "%s" to admin rol', (props) => {
     const { icon, text } = props
-    render(<DashboardPage />)
+    render(<DashboardPage email='hbiaser132@gmail.com' rol='admin' />)
+    screen.getByText(text)
+    icon && screen.getByTestId(icon)
+  })
+
+  it.each([
+    { text: 'MI PERFIL', icon: null },
+    { text: 'MI PORTAFOLIO', icon: 'icon-cart' },
+    { text: 'FICHA DE PRODUCTO', icon: 'icon-product' }
+  ])('should render bottom "%s" to provider rol', (props) => {
+    const { icon, text } = props
+    render(<DashboardPage email='hbiaser132@gmail.com' rol='provider' />)
     screen.getByText(text)
     icon && screen.getByTestId(icon)
   })

@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken'
 
 /**
  * @typedef {Object} Payload
- * @prop {string} rol
+ * @prop {'admin' | 'provider'} rol
  * @prop {string} email
  */
 
@@ -20,4 +20,13 @@ export const getToken = (payload) => {
 export const verifyToken = (token) => {
   // @ts-ignore
   return jwt.verify(token, process.env.JWT_SIGN)
+}
+
+/**
+ * @param {string} token
+ * @return {Payload}
+ * */
+export const decodeToken = (token) => {
+  // @ts-ignore
+  return jwt.decode(token)
 }
