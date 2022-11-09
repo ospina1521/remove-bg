@@ -16,8 +16,13 @@ describe.concurrent('ListOfProviderPage', () => {
     screen.getByText('PROVEEDORES')
   })
 
-  it('should render new providers FAB', () => {
+  it('should render FAB to add new providers ', () => {
     render(<ListOfProviderPage/>)
-    screen.getByText('Nuevos Proveedores')
+    screen.getByTestId('fab-icon')
+  })
+
+  it('should render a provider item', () => {
+    render(<ListOfProviderPage/>)
+    screen.findAllByTestId('')
   })
 })
