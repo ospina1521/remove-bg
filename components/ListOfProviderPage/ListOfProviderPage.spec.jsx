@@ -12,7 +12,7 @@ describe.concurrent('ListOfProviderPage', () => {
   it('should render header', () => {
     render(<ListOfProviderPage />)
     screen.getByTestId('logo')
-    screen.getByTestId('burgerMenu')
+    screen.getByTestId('backArrowIcon')
     screen.getByText('PROVEEDORES')
   })
 

@@ -43,11 +43,11 @@ describe.concurrent('ProfilePage', () => {
   })
 
   it.each([
-    'la empresa',
-    'número de nit.',
-    'representante legal',
-    'correo electrónico',
-    'número de celular'
+    'Nombre',
+    'Número de nit.',
+    'Nombre de empresa',
+    'Correo electrónico',
+    'Número de celular'
   ])('should render input %s', (props) => {
     render(<ProfilePage />)
     screen.getByLabelText(props)

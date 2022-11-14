@@ -7,8 +7,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #fff;
+  background-color: #fff;
   border: 1px solid #808080;
   border-radius: 100px;
   cursor: pointer;
+}
+
+.button:active {
+  border: 1px solid var(--primary-color);
+  color: var(--primary-color);
 }

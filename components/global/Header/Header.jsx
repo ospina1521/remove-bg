@@ -17,7 +17,7 @@ export const Header = (props) => {
   return (
     <header className={style.header}>
       {arrowBackEnable && <BackArrowIcon onClick={() => router.back()} />}
-      {burgerMenuEnable && <BurgerMenu onClick={() => router.back()} />}
+      {burgerMenuEnable && <BurgerMenu />}
       <p>{title}</p>
       <span><Logo /></span>
     </header>

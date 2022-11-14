@@ -6,11 +6,13 @@ describe.concurrent('createUser', () => {
     expect(createUser).toBeTypeOf('function')
   })
 
-  it('should throw parameters is not provided', () => {
-    expect(() => createUser()).toThrow('')
+  it('should throw if parameters is not provided', async () => {
+    // @ts-ignore
+    await expect(async () => createUser()).rejects.toThrow('Parameters is required')
   })
 
-  it('should throw if user is not Super Admin', () => {
-    expect(() => createUser({})).toThrow('')
+  it('should throw if user is not Super Admin', async () => {
+    // @ts-ignore
+    await expect(async () => createUser({})).rejects.toThrow()
   })
 })

@@ -26,6 +26,7 @@
 .button p {
   font-size: 12px;
   font-weight: 500;
+  line-height: 1;
   color: #575757;
   text-transform: uppercase;
 }

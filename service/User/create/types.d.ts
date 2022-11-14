@@ -1,5 +1,3 @@
-import { UserI } from "#/models/User/User"
+import { UserI } from "#/models/User/types"
 
-export interface CreateUserProps {
-    user: UserI
-}
+export interface CreateUserProps extends UserI {}

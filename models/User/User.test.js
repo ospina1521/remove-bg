@@ -7,8 +7,11 @@ describe.concurrent('User Model', () => {
   })
 
   it('should throw if name, rol and id props is not provided', () => {
+    // @ts-ignore
     expect(() => validateUser({})).toThrow('User.name is required')
+    // @ts-ignore
     expect(() => validateUser({ name: 'a' })).toThrow('User.rol is required')
+    // @ts-ignore
     expect(() => validateUser({ name: 'a', rol: 'a' })).toThrow('User.id is required')
   })
 })

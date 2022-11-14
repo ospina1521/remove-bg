@@ -1,4 +1,3 @@
-
 export const BackArrowIcon = (props) => {
   return (
     <svg

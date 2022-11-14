@@ -1,0 +1,50 @@
+.positionFab {
+  position: fixed;
+  bottom: 12px;
+  right: 12px;
+}
+
+.body {
+  padding: 0 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.item {
+  padding: 4px 0;
+  padding-right: 6px;
+  display: flex;
+  align-items: center;
+  border-radius: 12px;
+  width: 100%;
+  border: 1px solid #808080;
+}
+
+.item p {
+  margin-left: 12px;
+  margin-right: auto;
+  font-weight: 500;
+  color: #606060;
+}
+
+.item:hover p,
+.item:active p {
+  margin-left: 12px;
+  margin-right: auto;
+  font-weight: 500;
+  color: var(--primary-color);
+}
+
+.item .draw {
+  width: 2px;
+  margin-right: 6px;
+  height: 30px;
+  background: #808080;
+  transition: background-color 0.3s ease;
+}
+
+.item:hover .draw,
+.item:active .draw {
+  background-color: var(--primary-color);
+}

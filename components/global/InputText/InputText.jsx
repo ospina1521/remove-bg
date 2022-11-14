@@ -40,22 +40,19 @@ export function InputText (props) {
   const [data, setData] = useState('')
 
   const getClassNameInput = () => {
-    if (!isValid) { return `${Style.BoxInput_input}  ${Style.BoxInput_inputError}` }
+    if (!isValid) return `${Style.BoxInput_input}  ${Style.BoxInput_inputError}`
 
     if (value) return `${Style.BoxInput_input} ${Style.BoxInput_inputActivate}`
 
-    if (activate) { return `${Style.BoxInput_input} ${Style.BoxInput_inputActivate}` }
+    if (activate) return `${Style.BoxInput_input} ${Style.BoxInput_inputActivate}`
 
     return `${Style.BoxInput_input} `
   }
 
   const getClassNameLabel = () => {
-    if (value) {
-      return `${Style.BoxInput_label} ${Style.BoxInput_labelActivate}`
-    }
-    if (activate) {
-      return `${Style.BoxInput_label} ${Style.BoxInput_labelActivate}`
-    }
+    if (value) return `${Style.BoxInput_label} ${Style.BoxInput_labelActivate}`
+
+    if (activate) return `${Style.BoxInput_label} ${Style.BoxInput_labelActivate}`
 
     return `${Style.BoxInput_label}`
   }
@@ -89,6 +86,7 @@ export function InputText (props) {
 
           setData(value)
 
+          // @ts-ignore
           onChange && onChange(value, tempIsValid, e.nativeEvent.data)
         }}
       />

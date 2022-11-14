@@ -7,6 +7,7 @@ import { ChartIcon } from '../global/icons/ChartIcon/ChartIcon'
 import { NotificationIcon } from '../global/icons/NotificationIcon/NotificationIcon'
 import { ProductIcon } from '../global/icons/ProductIcon'
 import { OutLineButton } from '../global/OutLineButton/OutLineButton'
+import { routeToListOfProviderPage } from '../ListOfProviderPage/ListOfProviderPage'
 import { routeProfilePage } from '../ProfilePage/ProfilePage'
 import style from './DashboardPage.module.css'
 
@@ -19,7 +20,12 @@ export function DashboardPage (props) {
   const AdminOptions = () => {
     return (
       <div className={style.column} >
-        <OutLineButton icon={<NotificationIcon/>} text='GESTIÓN DE PROVEEDORES'/>
+        <Link href={routeToListOfProviderPage()}>
+          <a >
+            <OutLineButton icon={<NotificationIcon/>} text='GESTIÓN DE PROVEEDORES'/>
+          </a>
+        </Link>
+
         <OutLineButton icon={<ChartIcon/>} text='NUEVOS PRODUCTOS'/>
         <OutLineButton icon={<BellIcon/>} text='ANÁLISIS DE MÉTRICAS'/>
       </div>

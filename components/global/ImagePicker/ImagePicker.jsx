@@ -2,8 +2,7 @@
 import { fileToBase64 } from '#/utils/file/fileToBase64'
 import { getSizeToBase64 } from '#/utils/file/getSizeToBase64'
 import { reduceSizeImageAsBase64 } from '#/utils/file/reduceSizeImageAsBase64'
-import { useState } from 'react'
-import { v4 } from 'uuid'
+import { useId, useState } from 'react'
 
 /**
  * @typedef {Object} onChange
@@ -24,7 +23,8 @@ import { v4 } from 'uuid'
  * @param {(props: {url: string, file: null | File, size: number }) => JSX.Element} props.imageBuilder
  */
 export function ImagePicker (props) {
-  const id = v4()
+  const id = useId()
+
   const {
     className = '',
     accept = '',
