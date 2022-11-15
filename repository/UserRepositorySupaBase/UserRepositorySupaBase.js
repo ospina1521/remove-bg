@@ -5,15 +5,15 @@ export class UserRepositorySupaBase {
 
   /** @type {import('./types').CreateUserRepositoryType} */
   create = async (props) => {
-    const { name, email, urlPhoto } = props || {}
-    if (!name || !email) throw new Error('name and email param is required')
+    const { name, email, rol } = props || {}
+    if (!name || !email || !rol) throw new Error('rol, name and email param is required')
 
     const { status } = await supabase
       .from(this.tableNameUser)
       .insert({
+        rol,
         email,
-        name,
-        urlPhoto
+        name
       })
 
     const isSuccess = status >= 200 && status < 400

@@ -1,6 +1,7 @@
 import { createUser } from '#/service/User/create/createUser'
 import { getCookie } from '#/utils/cookies'
-import { decodeToken } from '#/utils/jsonWebToken'
+import { decodeToken, verifyToken } from '#/utils/jsonWebToken'
+import { validate } from 'email-validator'
 
 /**
  * @param {import('next').NextApiRequest} req
@@ -10,14 +11,21 @@ export default async function handler (req, res) {
   try {
     if (req.method !== 'POST') throw new Error('Method should be POST')
 
+    const token = getCookie('token', req.headers.cookie)
+    verifyToken(token)
+
+    const { rol } = decodeToken(token)
+
+    if (rol !== 'admin') throw new Error('Rol Admin is required to this endpoint')
+
     if (Object.entries(req.body).length === 0) throw new Error('Body request is required')
 
-    const token = getCookie('token', req.headers.cookie)
-    console.log('🚀 ~ file: index.js ~ line 16 ~ handler ~ token', token)
+    const { name, email } = req.body
 
-    // decodeToken(token)
+    if (!name || !email) throw new Error('Correo y Nombre son requeridos')
 
-    // verifyToken()
+    const isValidEmail = validate(email)
+    if (!isValidEmail) throw new Error('Email provided is not valid')
 
     await createUser(req.body)
 

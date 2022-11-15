@@ -1,7 +1,9 @@
+import { UserRol } from "#/types"
+
 export interface CreateUserRepositoryInterface {
     email: string
     name: string
-    rol: string
+    rol: UserRol
     urlPhoto?: string
 }
 

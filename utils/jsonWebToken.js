@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken'
 
 /**
  * @typedef {Object} Payload
- * @prop {'admin' | 'provider'} rol
+ * @prop {import('#/types').UserRol} rol
  * @prop {string} email
  */
 

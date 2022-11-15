@@ -1,3 +1,8 @@
 import { UserI } from "#/models/User/types"
+import { UserRol } from "#/types"
 
-export interface CreateUserProps extends UserI {}
+export interface CreateUserProps  {
+    name: string
+    email: string
+    rol: UserRol
+}

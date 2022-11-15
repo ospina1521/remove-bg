@@ -30,11 +30,14 @@ describe.concurrent('Create User Endpoint', () => {
     await testApiHandler({
       handler,
       test: async ({ fetch }) => {
+        const token = getToken({ email: 'manuellondogno132@gmail.com', rol: 'admin' })
+
         /** @type {RequestInit} */
         const config = {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            Cookie: `token="${token}"`
           }
         }
 
@@ -60,8 +63,7 @@ describe.concurrent('Create User Endpoint', () => {
           headers: {
             'Content-Type': 'application/json',
             Cookie: `token="${token}"`
-          },
-          body: JSON.stringify({ a: 'a' })
+          }
         }
 
         // @ts-ignore
@@ -74,19 +76,22 @@ describe.concurrent('Create User Endpoint', () => {
     })
   })
 
-  it.skip('should be response status 200 and empty body if request is success ', async () => {
+  it('should throw if email from body is not valid', async () => {
     await testApiHandler({
       handler,
       test: async ({ fetch }) => {
+        const token = getToken({ email: 'hbiaser132@gmail.com', rol: 'admin' })
+
         /** @type {RequestInit} */
         const config = {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            Cookie: `token="${token}"`
           },
           body: JSON.stringify({
-            name: 'a',
-            rol: '1'
+            email: 'a',
+            name: 'b'
           })
         }
 
@@ -94,7 +99,64 @@ describe.concurrent('Create User Endpoint', () => {
         const resp = await fetch(config)
         const json = await resp.json()
 
-        expect(json).toStrictEqual({})
+        expect(json).toStrictEqual({ error: 'Email provided is not valid' })
+        expect(resp.status).toBe(400)
+      }
+    })
+  })
+
+  it('should throw if email and name from body is empty', async () => {
+    await testApiHandler({
+      handler,
+      test: async ({ fetch }) => {
+        const token = getToken({ email: 'hbiaser132@gmail.com', rol: 'admin' })
+
+        /** @type {RequestInit} */
+        const config = {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Cookie: `token="${token}"`
+          },
+          body: JSON.stringify({
+            email: '',
+            name: ''
+          })
+        }
+
+        // @ts-ignore
+        const resp = await fetch(config)
+        const json = await resp.json()
+
+        expect(json).toStrictEqual({ error: 'Correo y Nombre son requeridos' })
+        expect(resp.status).toBe(400)
+      }
+    })
+  })
+
+  it('should respond status 200 if request is success', async () => {
+    await testApiHandler({
+      handler,
+      test: async ({ fetch }) => {
+        const token = getToken({ email: 'hbiaser132@gmail.com', rol: 'admin' })
+
+        /** @type {RequestInit} */
+        const config = {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Cookie: `token="${token}"`
+          },
+          body: JSON.stringify({
+            email: 'manuellodngono132@gmail.com',
+            name: 'Manuel'
+          })
+
+        }
+
+        // @ts-ignore
+        const resp = await fetch(config)
+
         expect(resp.status).toBe(200)
       }
     })
