@@ -30,4 +30,12 @@ export class UserRepositorySupaBase {
 
     return data?.[0]
   }
+
+  getAllUsers = async () => {
+    const { data } = await supabase
+      .from(this.tableNameUser)
+      .select()
+
+    return data ?? []
+  }
 }

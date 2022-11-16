@@ -27,7 +27,9 @@ export default async function handler (req, res) {
     const isValidEmail = validate(email)
     if (!isValidEmail) throw new Error('Email provided is not valid')
 
-    await createUser(req.body)
+    const canCreate = await createUser(req.body)
+
+    if (!canCreate) throw new Error('User already exist')
 
     res.status(200).json({})
   } catch (error) {

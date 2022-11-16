@@ -11,6 +11,8 @@ import { ImagePicker } from '../global/ImagePicker/ImagePicker'
 import { InputText } from '../global/InputText/InputText'
 import { Loading } from '../global/Loading/Loading'
 import style from './Profile.module.css'
+import { createUserService } from './provider/createUser.service'
+import { updateUserService } from './provider/updateUser.service'
 
 export const routeProfilePage = (isNewProfile = '') => `/profile?isNewProfile=${isNewProfile}`
 
@@ -46,9 +48,23 @@ export const ProfilePage = () => {
     e?.preventDefault()
     setIsLoading(true)
 
-    await delay(1000)
     try {
-      // -> send data
+      const { isNewProfile } = route?.query ?? {}
+
+      if (isNewProfile) {
+        await createUserService({ email: form.email, name: form.nombre, rol: 'provider' })
+      }
+
+      if (!isNewProfile) {
+        await updateUserService({
+          email: form.email,
+          name: form.nombre,
+          rol: 'provider',
+          nit: form.numeroNit,
+          phone: form.numeroCelular,
+          company: form.nombreEmpresa
+        })
+      }
 
       //
       setSave({
@@ -57,9 +73,10 @@ export const ProfilePage = () => {
       })
       setIsLoading(false)
     } catch (error) {
+      console.error('🚀 ~ Error Service: ProfilePage.jsx ~ line 67 ~ onSubmit ~ error', error.message)
       setSave({
         canShow: true,
-        message: 'Error al guardar'
+        message: error.message ?? 'Error al guardar'
       })
       setIsLoading(false)
     }
@@ -94,7 +111,7 @@ export const ProfilePage = () => {
         </div>
 
         <InputText type='text' value={form.nombreEmpresa} placeholder='Proveedor S.A.A' name='Nombre de empresa' onChange={nombreEmpresa => setForm(s => ({ ...s, nombreEmpresa }))}/>
-        <InputText type='text' value={form.email} placeholder='Franken@Luna.com' name='Correo electrónico' isDisable={Boolean(!route?.query?.isNewProfile)} onChange={email => setForm(s => ({ ...s, email }))}/>
+        <InputText type='email' value={form.email} placeholder='Franken@Luna.com' name='Correo electrónico' isDisable={Boolean(!route?.query?.isNewProfile)} onChange={email => setForm(s => ({ ...s, email }))}/>
         <InputText type='text' value={form.numeroCelular} placeholder='300 000 00 00' name='Número de celular' onChange={numeroCelular => setForm(s => ({ ...s, numeroCelular }))}/>
 
         <div style={{ marginTop: '16px' }}>

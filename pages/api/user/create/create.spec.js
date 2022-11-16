@@ -134,7 +134,7 @@ describe.concurrent('Create User Endpoint', () => {
     })
   })
 
-  it('should respond status 200 if request is success', async () => {
+  it('should throw if user already exist', async () => {
     await testApiHandler({
       handler,
       test: async ({ fetch }) => {
@@ -148,16 +148,18 @@ describe.concurrent('Create User Endpoint', () => {
             Cookie: `token="${token}"`
           },
           body: JSON.stringify({
-            email: 'manuellodngono132@gmail.com',
-            name: 'Manuel'
+            email: 'manuellondogno132@gmail.com',
+            name: 'Manuel',
+            rol: 'provider'
           })
-
         }
 
         // @ts-ignore
         const resp = await fetch(config)
+        const json = await resp.json()
 
-        expect(resp.status).toBe(200)
+        expect(json).toStrictEqual({ error: 'User already exist' })
+        expect(resp.status).toBe(400)
       }
     })
   })
