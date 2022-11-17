@@ -1,5 +1,4 @@
 import { getCookie } from '#/utils/cookies'
-import { delay } from '#/utils/delay'
 import { decodeToken } from '#/utils/jsonWebToken'
 import { Snackbar } from '@mui/material'
 import { useRouter } from 'next/router'
@@ -14,7 +13,15 @@ import style from './Profile.module.css'
 import { createUserService } from './provider/createUser.service'
 import { updateUserService } from './provider/updateUser.service'
 
-export const routeProfilePage = (isNewProfile = '') => `/profile?isNewProfile=${isNewProfile}`
+/**
+ * @param {Object} [props]
+ * @param {boolean} [props.isNewProfile]
+ * @param {string} [props.email]
+ */
+export const routeProfilePage = (props) => {
+  const { isNewProfile = '', email = '' } = props ?? {}
+  return `/profile?isNewProfile=${isNewProfile}&id=${email}`
+}
 
 export const ProfilePage = () => {
   const route = useRouter()
