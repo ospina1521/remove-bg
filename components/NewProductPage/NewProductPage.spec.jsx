@@ -14,4 +14,10 @@ describe.concurrent('NewProductPage', () => {
 
     screen.getByTestId('fab-icon')
   })
+
+  it('should render slider of 3 part', () => {
+    render(<NewProductPage />)
+
+    // screen.getby
+  })
 })
