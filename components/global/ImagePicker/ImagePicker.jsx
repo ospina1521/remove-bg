@@ -37,8 +37,6 @@ export function ImagePicker (props) {
   } = props
 
   // /** @type {string} */
-  // const initUrl = initialImage?.toString()
-  // const [url, setUrl] = useState(initUrl)
   const [_url, _setUrl] = useState({
     url: initialImage?.toString(),
     /** @type {null | File} */
@@ -51,31 +49,61 @@ export function ImagePicker (props) {
       className={className}
       htmlFor={id}
       onChange={async (e) => {
-        try {
-          /** @type {File} */
-          // @ts-ignore
-          const file = e.target.files[0]
-          const originBase64 = await fileToBase64(file)
-          const originSize = getSizeToBase64(originBase64)
+        /** @type {{files: Array<File>}} */
+        // @ts-ignore
+        const { files: filesPrimitive } = e.target
 
-          const reducedBase64 = await reduceSizeImageAsBase64({
-            MAX_HEIGHT,
-            MAX_WIDTH,
-            base64: originBase64
+        if (!multiple) {
+          try {
+            const file = filesPrimitive[0]
+            const originBase64 = await fileToBase64(file)
+            const originSize = getSizeToBase64(originBase64)
+
+            const reducedBase64 = await reduceSizeImageAsBase64({
+              MAX_HEIGHT,
+              MAX_WIDTH,
+              base64: originBase64
+            })
+            const reducedSize = getSizeToBase64(reducedBase64)
+
+            const base64 = reduceImage ? reducedBase64 : originBase64
+
+            const size = reduceImage ? reducedSize : originSize
+
+            _setUrl({
+              file,
+              size,
+              url: base64
+            })
+          } catch (error) {
+            console.log({ error: error.message })
+          }
+        }
+
+        if (multiple) {
+          const filesPromise = filesPrimitive.map(async e => {
+            const originBase64 = await fileToBase64(e)
+            const originSize = getSizeToBase64(originBase64)
+
+            const reducedBase64 = await reduceSizeImageAsBase64({
+              MAX_HEIGHT,
+              MAX_WIDTH,
+              base64: originBase64
+            })
+            const reducedSize = getSizeToBase64(reducedBase64)
+
+            const base64 = reduceImage ? reducedBase64 : originBase64
+
+            const size = reduceImage ? reducedSize : originSize
+            return { base64, size, file: e }
           })
-          const reducedSize = getSizeToBase64(reducedBase64)
 
-          const base64 = reduceImage ? reducedBase64 : originBase64
+          const files = await Promise.all(filesPromise)
 
-          const size = reduceImage ? reducedSize : originSize
-
-          _setUrl({
-            file,
-            size,
-            url: base64
-          })
-        } catch (error) {
-          console.log({ error: error.message })
+          // _setUrl({
+          //   file: files.map(e => e.file),
+          //   size:
+          // })
         }
       }}
     >
@@ -83,6 +111,7 @@ export function ImagePicker (props) {
       <ImageBuilder url={_url.url} file={_url.file} size={_url.size}/>
 
       <input
+        max={3}
         multiple={multiple}
         id={id}
         type="file"

@@ -1,15 +1,12 @@
 import style from './FloatingActionButton.module.css'
-/**
- * @param {Object} props
- * @param {JSX.Element} props.icon
- * @returns
- */
+
+/** @param {import('./types').Props} props */
 export const FloatingActionButton = (props) => {
-  const { icon } = props
+  const { icon, ...others } = props
 
   return (
-    <button className={style.fab} data-testid='fab-icon'>
+    <div className={style.fab} data-testid='fab-icon' {...others}>
       {icon}
-    </button>
+    </div>
   )
 }
