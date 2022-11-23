@@ -18,13 +18,11 @@ describe.concurrent('NewProductPage', () => {
   })
 
   it('should render back arrow button', () => {
-    screen.getByTestId('backArrow')
+    screen.getByTestId('productArrowBack')
   })
 
-  it('should render slider of 3 part', () => {
-    const carrousel = screen.getAllByTestId('product-img')
-
-    expect(carrousel.length).toBe(3)
+  it('should render "carrousel" component', () => {
+    screen.getByTestId('carrousel')
   })
 
   it.each([

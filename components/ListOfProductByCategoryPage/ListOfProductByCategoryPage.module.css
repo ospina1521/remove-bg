@@ -1,0 +1,14 @@
+.scroll {
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  max-height: 100vh;
+
+  /* overflow-x: hidden; */
+  scroll-snap-type: x mandatory;
+}
+
+.item {
+  scroll-snap-align: center;
+  flex: 1;
+}

@@ -1,4 +1,5 @@
 import { getCookie } from '#/utils/cookies'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { routeDashboardPage } from '../DashboardPage/DashboardPage'
 import { BurgerMenu } from '../global/BurgerMenu/BurgerMenu'
@@ -6,6 +7,7 @@ import { CategoryProductCard } from '../global/CategoryProductCard/CategoryProdu
 import { CircleAvatar } from '../global/CircleAvatar/CircleAvatar'
 import { PlaceholderImage } from '../global/icons/PlaceholderImage/PlaceholderImage'
 import { Logo } from '../global/Logo/Logo'
+import { routeToListOfProductByCategory } from '../ListOfProductByCategoryPage/ListOfProductByCategoryPage'
 import { routeEnterEmailPage } from '../LoginPage/EnterEmail/EnterEmailPage'
 import style from './HomePage.module.css'
 export const routeToHomePage = () => '/'
@@ -34,15 +36,32 @@ export const HomePage = () => {
       <h2 className={style.textNewCollection}>Nueva Colección</h2>
 
       <div className={style.rowNewCollection}>
-        <PlaceholderImage size='m' data-testid='new-collection-image' />
-        <PlaceholderImage size='m' data-testid='new-collection-image' />
+        <Link href={routeToListOfProductByCategory('new-collection')}>
+          <a><PlaceholderImage size='m' data-testid='new-collection-image' style={{ borderRadius: '4px' }} /></a>
+        </Link>
+
+        <Link href={routeToListOfProductByCategory('new-collection')}>
+          <a><PlaceholderImage size='m' data-testid='new-collection-image' style={{ borderRadius: '4px' }} /></a>
+        </Link>
       </div>
 
       <div className={style.rowCategories}>
-        <CategoryProductCard title='Mujer' />
-        <CategoryProductCard title='Hombre' />
-        <CategoryProductCard title='Marcas' />
-        <CategoryProductCard title='Rebajas' />
+        <Link href={routeToListOfProductByCategory('mujer')}>
+          <a ><CategoryProductCard title='Mujer' /></a>
+        </Link>
+
+        <Link href={routeToListOfProductByCategory('hombre')}>
+          <a ><CategoryProductCard title='Hombre' /></a>
+        </Link>
+
+        <Link href={routeToListOfProductByCategory('marcas')}>
+          <a ><CategoryProductCard title='Marcas' /></a>
+        </Link>
+
+        <Link href={routeToListOfProductByCategory('rebajas')}>
+          <a ><CategoryProductCard title='Rebajas' /></a>
+        </Link>
+
       </div>
     </div>
   )

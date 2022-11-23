@@ -67,7 +67,7 @@ describe.concurrent('EnterEmailController', () => {
     })
   })
 
-  it.runIf(credentials.isDev)('should be status 200 and "error: null and code: ... ..." if request is success', async () => {
+  it.runIf(credentials.isDevMode)('should be status 200 and "error: null and code: ... ..." if request is success', async () => {
     await testApiHandler({
       handler: EnterEmailController,
       test: async ({ fetch }) => {
@@ -96,7 +96,7 @@ describe.concurrent('EnterEmailController', () => {
     })
   })
 
-  it.runIf(!credentials.isDev)('only prod -> should be status 200 and "error: null and code: null" if request is success', async () => {
+  it.runIf(!credentials.isDevMode)('only prod -> should be status 200 and "error: null and code: null" if request is success', async () => {
     await testApiHandler({
       handler: EnterEmailController,
       test: async ({ fetch }) => {
@@ -119,7 +119,7 @@ describe.concurrent('EnterEmailController', () => {
     })
   })
 
-  it.runIf(credentials.isDev)('should be status 200 and "error: null" if request is success', async () => {
+  it.runIf(credentials.isDevMode)('should be status 200 and "error: null" if request is success', async () => {
     await testApiHandler({
       handler: EnterEmailController,
       test: async ({ fetch }) => {

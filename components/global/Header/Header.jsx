@@ -16,8 +16,10 @@ export const Header = (props) => {
   const router = useRouter()
   return (
     <header className={style.header}>
-      {arrowBackEnable && <BackArrowIcon onClick={() => router.back()} />}
-      {burgerMenuEnable && <BurgerMenu />}
+      <span>
+        {/* arrowBackEnable && */ <BackArrowIcon onClick={() => router.back()} />}
+        {/* {burgerMenuEnable && <BurgerMenu />} */}
+      </span>
       <p>{title}</p>
       <span><Logo /></span>
     </header>

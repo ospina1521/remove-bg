@@ -10,25 +10,6 @@
   top: 30px;
 }
 
-.boxCarrousel {
-  display: flex;
-  overflow-x: scroll;
-  overflow-y: hidden;
-  scroll-snap-type: x mandatory;
-}
-
-.itemCarrousel {
-  flex: 1;
-  scroll-snap-align: center;
-}
-
-.img {
-  width: 100vw;
-  max-width: var(--max-width);
-  height: 100%;
-  margin-top: -2px;
-}
-
 .fields {
   display: flex;
   flex-direction: column;

@@ -37,5 +37,5 @@ export const enterEmailBackService = async (email) => {
 
   // El código solo debe ser visible en modo desarrollo y en modo de pruebas
   // con la finalidad de que los test unitarios pasen exitosamente
-  return credentials.isDev ? code : null
+  return credentials.isDevMode ? code : null
 }

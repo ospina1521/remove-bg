@@ -111,7 +111,7 @@ describe.concurrent('EnterCodeController', () => {
     })
   })
 
-  it.runIf(credentials.isDev)('should be status 200 and return code if request is success', async () => {
+  it.runIf(credentials.isDevMode)('should be status 200 and return code if request is success', async () => {
     let code = ''
 
     await testApiHandler({
