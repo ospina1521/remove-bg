@@ -6,8 +6,7 @@ describe.concurrent('NewProductPage', () => {
   beforeEach(() => {
     cleanup()
     render(<NewProductPage />)
-  }
-  )
+  })
 
   it('should be a function', () => {
     expect(NewProductPage).toBeTypeOf('function')

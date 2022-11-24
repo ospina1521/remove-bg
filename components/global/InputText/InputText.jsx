@@ -3,34 +3,19 @@ import Style from './InputText.module.css'
 import { validate } from '#/utils/validate'
 import { useState } from 'react'
 
-/**
- * @param {Object} props
- * @param {string} [props.name]
- * @param {string} [props.value]
- * @param {RegExp} [props.regExp]
- * @param {boolean} [props.isValid]
- * @param {number} [props.maxLength]
- * @param {number} [props.minLength]
- * @param {string} [props.className]
- * @param {boolean} [props.isDisable]
- * @param {string} props.placeholder
- * @param {() => void} [props.onSubmit]
- * @param {"off" | "on"} [props.autoComplete]
- * @param {import("react").InputHTMLAttributes<HTMLInputElement>['type']} [props.type]
- * @param {(value: string, isValid: boolean, keyDown: string) => void} [props.onChange]
- * @returns
- */
+/** @param {import('./types').Props} props */
 export function InputText (props) {
   const {
-    maxLength,
-    minLength,
     type,
     value,
+    maxLength,
+    minLength,
     name = '',
     regExp = /.+/,
     className = '',
     isValid = true,
     placeholder = '',
+    selectOptions = [],
     autoComplete = 'off',
     isDisable = false,
     onChange = () => {}
@@ -57,6 +42,36 @@ export function InputText (props) {
     return `${Style.BoxInput_label}`
   }
 
+  const getSelectValid = () => {
+    if (!isValid) return `${Style.BoxInput} ${Style.Select} ${Style.selectError}`
+
+    if (activate) return `${Style.BoxInput} ${Style.Select} ${Style.selectActivate}`
+
+    return `${Style.BoxInput} ${Style.Select}`
+  }
+
+  if (type === 'select') {
+    return (
+      <div className={getSelectValid()}>
+        <label className={Style.BoxInput_labelActivate} style={{ marginLeft: '4px' }} htmlFor="fruit">{name}</label>
+        <select
+          required
+          defaultValue={'Selecciona una categoría'}
+          onChange={(e) => {
+            const { value } = e.target
+            const isValid = value !== selectOptions[0]
+            console.log({ value, name })
+            onChange && onChange(value, isValid, '')
+            setActivate(isValid)
+          }}
+        >
+
+          {selectOptions?.map((e, i) => <option value={e} key={i}>{e}</option>)}
+        </select>
+      </div>
+    )
+  }
+
   return (
     <div className={`${Style.BoxInput} ${className}`}>
       <label className={getClassNameLabel()} htmlFor={name}>
@@ -64,18 +79,18 @@ export function InputText (props) {
       </label>
 
       <input
+        id={name}
+        type={type}
+        name={name}
+        value={value}
         disabled={isDisable}
         maxLength={maxLength}
         minLength={minLength}
-        value={value}
+        placeholder={placeholder}
         autoComplete={autoComplete}
+        className={getClassNameInput()}
         onFocus={() => setActivate(true)}
         onBlur={() => data === '' && setActivate(false)}
-        type={type}
-        name={name}
-        id={name}
-        placeholder={placeholder}
-        className={getClassNameInput()}
         onChange={(e) => {
           const value = e.target.value
 

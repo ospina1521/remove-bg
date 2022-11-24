@@ -4,24 +4,7 @@ import { getSizeToBase64 } from '#/utils/file/getSizeToBase64'
 import { reduceSizeImageAsBase64 } from '#/utils/file/reduceSizeImageAsBase64'
 import { useId, useState } from 'react'
 
-/**
- * @typedef {Object} onChange
- * @prop {string} url
- * @prop {number} size
- * @prop {File} file
- */
-
-/**
- * @param {Object} props
- * @param {string} [props.className]
- * @param {string | ArrayBuffer} [props.initialImage]
- * @param {boolean} [props.reduceImage]
- * @param {number} [props.MAX_HEIGHT = 512]
- * @param {number} [props.MAX_WIDTH = 512]
- * @param {string} [props.accept] type only images extensions, doc -> https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/accept
- * @param {boolean} [props.multiple] doc -> https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/multiple
- * @param {(props: {url: string, file: null | File, size: number }) => JSX.Element} props.imageBuilder
- */
+/** @param {import('./types').Prop} props */
 export function ImagePicker (props) {
   const id = useId()
 
@@ -33,16 +16,13 @@ export function ImagePicker (props) {
     multiple = false,
     initialImage = '',
     reduceImage = true,
-    imageBuilder: ImageBuilder = () => <></>
+    imageBuilder: ImageBuilder = () => <></>,
+    onChangeMultiFiles = () => {}
   } = props
 
-  // /** @type {string} */
-  const [_url, _setUrl] = useState({
-    url: initialImage?.toString(),
-    /** @type {null | File} */
-    file: null,
-    size: 0
-  })
+  /** @type {import('./types').InitStateFile} */
+  const initSingleStateFile = { url: initialImage?.toString(), file: null, size: 0 }
+  const [singleFile, setSingleFile] = useState(initSingleStateFile)
 
   return (
     <label
@@ -70,7 +50,7 @@ export function ImagePicker (props) {
 
             const size = reduceImage ? reducedSize : originSize
 
-            _setUrl({
+            setSingleFile({
               file,
               size,
               url: base64
@@ -81,7 +61,7 @@ export function ImagePicker (props) {
         }
 
         if (multiple) {
-          const filesPromise = filesPrimitive.map(async e => {
+          const filesPromise = Object.values(filesPrimitive).map(async e => {
             const originBase64 = await fileToBase64(e)
             const originSize = getSizeToBase64(originBase64)
 
@@ -98,17 +78,15 @@ export function ImagePicker (props) {
             return { base64, size, file: e }
           })
 
-          const files = await Promise.all(filesPromise)
+          const files = (await Promise.all(filesPromise))
+            .map(e => ({ ...e, url: e.base64 }))
 
-          // _setUrl({
-          //   file: files.map(e => e.file),
-          //   size:
-          // })
+          onChangeMultiFiles(files)
         }
       }}
     >
 
-      <ImageBuilder url={_url.url} file={_url.file} size={_url.size}/>
+      <ImageBuilder url={singleFile.url} file={singleFile.file} size={singleFile.size}/>
 
       <input
         max={3}

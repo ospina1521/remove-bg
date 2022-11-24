@@ -10,6 +10,7 @@ export default function MyApp ({ Component, pageProps }) {
     const vh = window.innerHeight * 0.01
     document.documentElement.style.setProperty('--vh', `${vh}px`)
   }, [])
+
   return (
     <>
       <Head>

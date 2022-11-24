@@ -121,9 +121,7 @@ export const ProfilePage = () => {
         <InputText type='email' value={form.email} placeholder='Franken@Luna.com' name='Correo electrónico' isDisable={Boolean(!route?.query?.isNewProfile)} onChange={email => setForm(s => ({ ...s, email }))}/>
         <InputText type='text' value={form.numeroCelular} placeholder='300 000 00 00' name='Número de celular' onChange={numeroCelular => setForm(s => ({ ...s, numeroCelular }))}/>
 
-        <div style={{ marginTop: '16px' }}>
-          <Button text='Guardar' type='submit' />
-        </div>
+        <Button text='Guardar' type='submit' style={{ marginTop: '16px' }}/>
 
       </form>
     </>

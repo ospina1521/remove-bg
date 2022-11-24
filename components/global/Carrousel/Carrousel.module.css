@@ -15,4 +15,6 @@
   max-width: var(--max-width);
   height: 100%;
   margin-top: -2px;
+  aspect-ratio: 78/109;
+  object-fit: cover;
 }
