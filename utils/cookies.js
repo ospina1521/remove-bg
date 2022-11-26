@@ -29,11 +29,14 @@ export function setCookie ({ key, value, days, context }) {
  * */
 export function getCookie (key, context) {
   try {
-    const cookie = context ?? document?.cookie
+    const cookie = context ??
+    (function () {
+      if (typeof window.document !== 'undefined') return document?.cookie
+    })()
 
     if (!key) throw new Error('key param is required')
 
-    const ca = cookie.split(';')
+    const ca = cookie?.split(';') ?? []
 
     const [, value] = ca
       .find(e => e.trim().split('=')[0] === key)
@@ -41,6 +44,6 @@ export function getCookie (key, context) {
 
     return JSON.parse(value)
   } catch (error) {
-    console.error('🚀 ~ Parser Error: cookies.js ~ line 36 ~ getCookie ~ error: ', '"Cookie don\'t exist"')
+    console.error('🚀 ~ Parser Error: cookies.js ~ line 36 ~ getCookie ~ error: ', error.message)
   }
 }

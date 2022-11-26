@@ -12,7 +12,7 @@ export const routeToPortfolioPage = () => '/portfolio'
 
 export const PortfolioPage = () => {
   const token = getCookie('token')
-  const { rol } = decodeToken(token)
+  const { rol } = decodeToken(token) ?? {}
 
   return (
     <>
