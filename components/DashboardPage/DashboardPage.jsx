@@ -8,6 +8,7 @@ import { NotificationIcon } from '../global/icons/NotificationIcon/NotificationI
 import { ProductIcon } from '../global/icons/ProductIcon'
 import { OutLineButton } from '../global/OutLineButton/OutLineButton'
 import { routeToListOfProviderPage } from '../ListOfProviderPage/ListOfProviderPage'
+import { routeToNewProductPage } from '../NewProductPage/NewProductPage'
 import { routeToPortfolioPage } from '../PortfolioPage/PortfolioPage'
 import { routeProfilePage } from '../ProfilePage/ProfilePage'
 import style from './DashboardPage.module.css'
@@ -36,7 +37,8 @@ export function DashboardPage (props) {
   const ProviderOptions = () => {
     return (
       <div className={style.column} >
-        <Link href={routeToPortfolioPage()}><a><OutLineButton icon={<CartIcon />} text='MI PORTAFOLIO'/></a></Link>
+        {/* TODO: Remove */}
+        <Link href={routeToNewProductPage()/* routeToPortfolioPage() */}><a><OutLineButton icon={<CartIcon />} text='MI PORTAFOLIO'/></a></Link>
         <OutLineButton icon={<ProductIcon />} text='FICHA DE PRODUCTO'/>
       </div>
     )
