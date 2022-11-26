@@ -5,7 +5,7 @@
   "scripts": {
     "test": "vitest",
     "coverage:prod": "vitest run --coverage --mode=prod",
-    "coverage:test": "vitest run --coverage",
+    "coverage:test": "vitest run --coverage --mode=development",
     "coverage": "npm run coverage:prod && npm run coverage:test",
     "dev": "next dev",
     "build": "next build",
