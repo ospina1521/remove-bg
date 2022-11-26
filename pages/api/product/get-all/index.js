@@ -16,6 +16,7 @@ export default async function handler (req, res) {
     // if (typeof provider !== 'string') throw new Error('provider query should be a string')
 
     const criteria = { category, provider }
+    console.log('🚀 ~ file: index.js ~ line 19 ~ handler ~ criteria', criteria)
 
     // @ts-ignore
     const resp = await getAllProduct(criteria)
