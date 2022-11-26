@@ -1,29 +1,21 @@
-import { credentials } from '#/credentials'
-
 /** @param {import('./types').ReqGetProduct} props */
 export const getProductService = async (props) => {
-  if (credentials.isDevMode) {
-    return [{
-      name: 'camiseta',
-      price: '30.000'
-    },
-    {
-      name: 'camiseta',
-      price: '30.000'
-    },
-    {
-      name: 'camiseta',
-      price: '30.000'
-    },
-    {
-      name: 'camiseta',
-      price: '30.000'
-    },
-    {
-      name: 'camibuso',
-      price: '35.000'
-    }]
+  const { category } = props
+
+  /** @type {RequestInit} */
+  const config = {
+    method: 'GET',
+    headers: { 'Content-type': 'application/json' }
   }
 
-  throw new Error('Function getProductService not implemented in production')
+  const url = new URL(location.origin + '/api/product/get-all')
+  url.searchParams.set('category', category || '')
+
+  const resp = await fetch(url, config)
+
+  const json = await resp.json()
+
+  if (resp.status >= 400) throw new Error(`Ocurrió un error al hacer la petición: ${json.error}`)
+
+  return json.data
 }

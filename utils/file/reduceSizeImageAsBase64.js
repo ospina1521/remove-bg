@@ -35,6 +35,7 @@ export async function reduceSizeImageAsBase64 ({
       canvas.height = height
       const ctx = canvas.getContext('2d')
       ctx?.drawImage(img, 0, 0, width, height)
+      ctx?.getImageData(0, 0, width, height)
       resolve(canvas.toDataURL()) // this will return base64 image results after resize
     }
   })

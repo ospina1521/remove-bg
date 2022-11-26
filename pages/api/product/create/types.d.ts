@@ -1,8 +1,8 @@
-export interface ReqPostCreateProductService {
+export interface  ReqBody {
+  images: Array<string>
   code: string
   name: string
   price: string
   quantity: string
   category: string
-  image: String<string>
 }

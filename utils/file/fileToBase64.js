@@ -1,5 +1,8 @@
 // @ts-check
-/** @param {File} file */
+/**
+ * @param {File} file
+ * @return {Promise<string>}
+ * */
 export function fileToBase64 (file) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader()
@@ -8,6 +11,7 @@ export function fileToBase64 (file) {
 
     reader.onload = (_) => {
       const url = _?.target?.result
+      // @ts-ignore
       resolve(url)
     }
 

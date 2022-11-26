@@ -9,7 +9,7 @@ export const postCreateProductService = async (props) => {
     body: JSON.stringify(props)
   }
 
-  const url = '/api/product'
+  const url = '/api/product/create'
 
   const resp = await fetch(url, config)
 

@@ -5,7 +5,7 @@ import { Product } from './Product'
 describe('Product', () => {
   beforeEach(() => {
     cleanup()
-    render(<Product name='camiseta' price='30.000' />)
+    render(<Product name='camiseta' price='30.000' images={[]} />)
   })
 
   it('should render heading title', () => {

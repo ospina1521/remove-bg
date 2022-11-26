@@ -1,13 +1,8 @@
-import { sendMail } from '#/providers/Mail/Mail'
+import { supabase } from '#/providers/SupaBase/createClient'
 
 /** @param {import('./types').CreateProductProp} props */
 export const createProduct = async (props) => {
-  if (!props) throw new Error('Params is required')
+  const resp = await supabase.from('Products').insert(props)
 
-  const b = await sendMail({
-    email: 'hbiaser132@gmail.com',
-    message: 'mensaje'
-  })
-
-  return b
+  return resp
 }

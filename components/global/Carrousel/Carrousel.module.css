@@ -3,6 +3,8 @@
   overflow-x: scroll;
   overflow-y: hidden;
   scroll-snap-type: x mandatory;
+
+  /* background-color: #ff6969; */
 }
 
 .itemCarrousel {

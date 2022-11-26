@@ -9,7 +9,7 @@ export const routeToListOfProductByCategory = (category = '') => `/list-of-produ
 export const ListOfProductByCategory = (props) => {
   const { testListProducts } = props
 
-  let { getProduct, products } = useGetProduct()
+  let { products, getProduct } = useGetProduct()
   products = credentials.isTestMode ? testListProducts : products
 
   useEffect(() => {
@@ -23,7 +23,7 @@ export const ListOfProductByCategory = (props) => {
       {products.map((e, i) => {
         return (
           <div key={i} >
-            <Product name={e.name} price={e.price}/>
+            <Product name={e.name} price={e.price} images={e.images}/>
           </div>
         )
       })}

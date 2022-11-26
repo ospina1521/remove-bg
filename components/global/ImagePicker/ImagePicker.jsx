@@ -21,7 +21,7 @@ export function ImagePicker (props) {
   } = props
 
   /** @type {import('./types').InitStateFile} */
-  const initSingleStateFile = { url: initialImage?.toString(), file: null, size: 0 }
+  const initSingleStateFile = { url: initialImage?.toString(), file: null, size: '0' }
   const [singleFile, setSingleFile] = useState(initSingleStateFile)
 
   return (
@@ -79,7 +79,7 @@ export function ImagePicker (props) {
           })
 
           const files = (await Promise.all(filesPromise))
-            .map(e => ({ ...e, url: e.base64 }))
+            .map(e => ({ size: e.size, file: e.file, url: e.base64 }))
 
           onChangeMultiFiles(files)
         }

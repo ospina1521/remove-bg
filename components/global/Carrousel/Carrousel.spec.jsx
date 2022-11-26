@@ -5,7 +5,8 @@ import { Carrousel } from './Carrousel'
 describe('Carrousel', () => {
   beforeEach(() => {
     cleanup()
-    render(<Carrousel />)
+
+    render(<Carrousel listOfImages={['', '', '']} />)
   })
 
   it('should be a function', () => {

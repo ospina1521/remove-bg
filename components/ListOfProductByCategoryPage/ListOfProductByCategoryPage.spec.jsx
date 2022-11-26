@@ -1,3 +1,4 @@
+import { credentials } from '#/credentials'
 import { cleanup, render, screen } from '@testing-library/react'
 import { describe, it, expect, beforeEach } from 'vitest'
 import { ListOfProductByCategory } from './ListOfProductByCategoryPage'
@@ -8,11 +9,13 @@ describe.concurrent('ListOfProductByCategory', () => {
 
     const products = [{
       name: 'camiseta',
-      price: '30.000'
+      price: '30.000',
+      images: ['']
     },
     {
       name: 'camibuso',
-      price: '35.000'
+      price: '35.000',
+      images: ['']
     }]
 
     location.href = 'http://localhost:3000/list-of-product?category=new-collection'
@@ -24,7 +27,7 @@ describe.concurrent('ListOfProductByCategory', () => {
     expect(ListOfProductByCategory).toBeTypeOf('function')
   })
 
-  it('should render 2 "carrousel" components ', () => {
+  it.runIf(credentials.isDevMode)('should render 2 "carrousel" components ', () => {
     const carrousel = screen.getAllByTestId('carrousel')
     expect(carrousel.length).toBe(2)
   })

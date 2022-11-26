@@ -53,7 +53,7 @@ export const ListOfProviderPage = () => {
 
         {listOfProviders.map((e, i) => {
           const isLast = listOfProviders.length - 1 === i
-          console.log('🚀 ~ file: ListOfProviderPage.jsx ~ line 63 ~ {listOfProviders.map ~ e', e)
+
           return (
             <Link key={i} href={routeProfilePage({ email: e.email })} >
               <a>
