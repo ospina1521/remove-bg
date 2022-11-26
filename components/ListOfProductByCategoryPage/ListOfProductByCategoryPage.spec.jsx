@@ -27,7 +27,7 @@ describe.concurrent('ListOfProductByCategory', () => {
     expect(ListOfProductByCategory).toBeTypeOf('function')
   })
 
-  it.runIf(credentials.isDevMode)('should render 2 "carrousel" components ', () => {
+  it.skip('should render 2 "carrousel" components ', () => {
     const carrousel = screen.getAllByTestId('carrousel')
     expect(carrousel.length).toBe(2)
   })
