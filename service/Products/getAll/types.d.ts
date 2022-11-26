@@ -1,3 +1,4 @@
 export interface SearchProductByCriteria {
-  category: string
+  category?: string
+  provider?: string
 }

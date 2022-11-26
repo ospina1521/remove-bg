@@ -7,6 +7,7 @@ describe.concurrent('createProduct', () => {
   })
 
   it('should throw if params is not provided', () => {
+    // @ts-ignore
     expect(() => createProduct()).rejects.toThrow('Params is required')
   })
 

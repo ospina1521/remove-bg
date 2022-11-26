@@ -5,4 +5,5 @@ export interface CreateProductProp {
   price: string
   quantity: string
   category: string
+  provider: string
 }

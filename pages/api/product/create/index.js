@@ -4,7 +4,7 @@ import { cloudinary } from '#/providers/Cloudinary/createClient'
 // import { supabase } from '#/providers/SupaBase/createClient'
 import { createProduct } from '#/service/Products/create/createProducto'
 import { getCookie } from '#/utils/cookies'
-import { verifyToken } from '#/utils/jsonWebToken'
+import { decodeToken, verifyToken } from '#/utils/jsonWebToken'
 // import { decode } from 'base64-arraybuffer'
 import { removeBackgroundFromImageBase64 } from 'remove.bg'
 
@@ -18,6 +18,8 @@ export default async function handler (req, res) {
 
     const token = getCookie('token', req.headers.cookie)
     verifyToken(token)
+
+    const { email } = decodeToken(token)
 
     if (Object.entries(req.body).length === 0) throw new Error('Body request is required')
 
@@ -41,7 +43,6 @@ export default async function handler (req, res) {
           })
       )
 
-    console.log('hola1')
     const imagesWithoutBG = await Promise.all(listPromisesOfRemoveBG)
 
     const listPromisesOfUploadImages = imagesWithoutBG
@@ -50,19 +51,18 @@ export default async function handler (req, res) {
           cloudinary.uploader.upload('data:image/png;base64,' + e.base64img)
       )
 
-    console.log('hola2')
     const urlImages = await Promise.all(listPromisesOfUploadImages)
 
     const _img = urlImages.map(e => e.url)
 
-    console.log('hola3')
     const resp = await createProduct({
       images: _img,
       code,
       name,
       price,
       quantity,
-      category
+      category,
+      provider: email
     })
 
     res.status(200).json({ ...resp })
