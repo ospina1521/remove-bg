@@ -5,6 +5,8 @@ import { NewProductPage } from './NewProductPage'
 describe.concurrent('NewProductPage', () => {
   beforeEach(() => {
     cleanup()
+    document.location.href = 'http://localhost:3000/portfolio'
+
     render(<NewProductPage />)
   })
 

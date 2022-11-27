@@ -37,8 +37,12 @@ export function DashboardPage (props) {
   const ProviderOptions = () => {
     return (
       <div className={style.column} >
-        {/* TODO: Remove */}
-        <Link href={routeToNewProductPage()/* routeToPortfolioPage() */}><a><OutLineButton icon={<CartIcon />} text='MI PORTAFOLIO'/></a></Link>
+        {/* TODO: change url */}
+        <Link href={
+          // routeToNewProductPage()
+          routeToPortfolioPage()
+        }
+        ><a><OutLineButton icon={<CartIcon />} text='MI PORTAFOLIO'/></a></Link>
         <OutLineButton icon={<ProductIcon />} text='FICHA DE PRODUCTO'/>
       </div>
     )

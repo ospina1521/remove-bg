@@ -1,12 +1,13 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 
-import { cloudinary } from '#/providers/Cloudinary/createClient'
-// import { supabase } from '#/providers/SupaBase/createClient'
+import { credentials } from '#/credentials'
+import { supabase } from '#/providers/SupaBase/createClient'
 import { createProduct } from '#/service/Products/create/createProducto'
 import { getCookie } from '#/utils/cookies'
 import { decodeToken, verifyToken } from '#/utils/jsonWebToken'
-// import { decode } from 'base64-arraybuffer'
+import { decode } from 'base64-arraybuffer'
 import { removeBackgroundFromImageBase64 } from 'remove.bg'
+import { v4 } from 'uuid'
 
 /**
  * @param {import('next').NextApiRequest} req
@@ -38,7 +39,7 @@ export default async function handler (req, res) {
         e =>
           removeBackgroundFromImageBase64({
             base64img: e,
-            apiKey: 'hFR252RG4bC6FMMMmJ7y4mTX',
+            apiKey: credentials.removeBgKey,
             size: 'regular'
           })
       )
@@ -47,13 +48,26 @@ export default async function handler (req, res) {
 
     const listPromisesOfUploadImages = imagesWithoutBG
       .map(
-        (e, i) =>
-          cloudinary.uploader.upload('data:image/png;base64,' + e.base64img)
+        (e, i) => {
+          return supabase.storage
+            .from('products')
+            .upload(
+              `public/${v4()}.png`,
+              decode(e.base64img),
+              { contentType: 'image/png' }
+            )
+        }
       )
 
     const urlImages = await Promise.all(listPromisesOfUploadImages)
 
-    const _img = urlImages.map(e => e.url)
+    const _img = urlImages.map(e => {
+      if (e.error) throw new Error('Error al guardar una imagen')
+
+      const urlBase = 'https://wtfzbttwmkofjtobyckk.supabase.co/storage/v1/object/public/products/'
+
+      return urlBase + e.data?.path
+    })
 
     const resp = await createProduct({
       images: _img,
@@ -64,6 +78,8 @@ export default async function handler (req, res) {
       category,
       provider: email
     })
+
+    if (resp.error?.message) throw new Error(resp.error?.message)
 
     res.status(200).json({ ...resp })
   } catch (error) {

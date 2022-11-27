@@ -1,20 +1,21 @@
 import { Snackbar } from '@mui/material'
 import { useRouter } from 'next/router'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Button } from '../global/Button/Button'
 import { Carrousel } from '../global/Carrousel/Carrousel'
 import { FloatingActionButton } from '../global/FloatingActionButton/FloatingActionButton'
 import { UploadIcon } from '../global/icons/UploadIcon/UploadIcon'
 import { ImagePicker } from '../global/ImagePicker/ImagePicker'
 import { InputText } from '../global/InputText/InputText'
-import { postCreateProductService } from './providers/postCreateProduct.service'
+import { postCreateProductService } from './providers/postCreateProduct/postCreateProduct.service'
 import { Loading } from '../global/Loading/Loading'
 import { ProductBackArrow } from '../global/ProductArrowBack'
+import { useGetProduct } from './providers/getProductById/useGetProductByIdService'
 import style from './NewProductPage.module.css'
-// import { supabase } from '#/providers/SupaBase/createClient'
-// import { decode } from 'base64-arraybuffer'
+import { useGetSearchParams } from '#/utils/hooks/useGetSearchParams'
+import { putUpdateProductService } from './providers/putUpdateProduct/putUpdateProduct.service'
 
-export const routeToNewProductPage = () => '/new-product'
+export const routeToNewProductPage = (id = '') => `/new-product?id=${id}`
 
 export const NewProductPage = () => {
   const router = useRouter()
@@ -25,7 +26,7 @@ export const NewProductPage = () => {
     message: ''
   })
 
-  /** @type {import('./providers/types').ReqPostCreateProductService} */
+  /** @type {import('./providers/postCreateProduct/types').ReqPostCreateProductService} */
   const initForm = {
     images: [],
     code: '',
@@ -35,6 +36,23 @@ export const NewProductPage = () => {
     category: ''
   }
   const [form, setForm] = useState(initForm)
+  const { product, getProductById } = useGetProduct()
+
+  const { id } = useGetSearchParams(['id'])
+
+  useEffect(() => {
+    if (typeof location === 'undefined') return
+
+    if (!id) return
+
+    getProductById({ id })
+  }, [id])
+
+  useEffect(() => {
+    if (!product.properties) return
+
+    setForm(product.properties)
+  }, [product])
 
   /** @param {import('react').FormEvent<HTMLFormElement>} e */
   const onSubmit = async (e) => {
@@ -43,7 +61,8 @@ export const NewProductPage = () => {
     setIsLoading(true)
 
     try {
-      const resp = await postCreateProductService(form)
+      if (id) await putUpdateProductService(id, form)
+      if (!id) await postCreateProductService(form)
       setIsLoading(false)
 
       setSave({
@@ -63,10 +82,9 @@ export const NewProductPage = () => {
   }
 
   return (
-
-    <>
-
+    <div>
       <Loading canShow={isLoading} />
+
       <Snackbar
         open={save.canShow}
         autoHideDuration={6000}
@@ -117,7 +135,7 @@ export const NewProductPage = () => {
           <InputText
             value={form.category}
             type='select'
-            name='Categoría'
+            name={'Categoría'}
             selectOptions={['Selecciona una categoría', 'Mujer', 'Hombre', 'Marcas', 'Rebajas']}
             onChange={category => setForm(e => ({ ...e, category: category.toLocaleLowerCase() }))}
           />
@@ -133,6 +151,13 @@ export const NewProductPage = () => {
           className={style.positionFab}
           imageBuilder={(props) => <FloatingActionButton icon={<UploadIcon width={28} height={28} />} />}
           onChangeMultiFiles={async (props) => {
+            if (props.length === 0) {
+              return setSave({
+                canShow: true,
+                message: 'Elija 3 imágenes'
+              })
+            }
+
             if (props.length > 3) {
               return setSave({
                 canShow: true,
@@ -144,6 +169,6 @@ export const NewProductPage = () => {
           }}
         />
       </div>
-    </>
+    </div>
   )
 }

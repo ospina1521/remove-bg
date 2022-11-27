@@ -25,7 +25,6 @@ describe.concurrent('PortafolioPage', () => {
     screen.getByTestId('backArrowIcon')
     screen.getByTestId('logo')
     screen.getByText('CATÁLOGO DE PRODUCTOS')
-    screen.getByTestId('fill-circle-avatar')
   })
 
   it('should render FAB if rol is Provider', () => {
@@ -50,7 +49,6 @@ describe.concurrent('PortafolioPage', () => {
     })
 
     render(<PortfolioPage />)
-
     expect(() => screen.getByTestId('fab-icon')).toThrow()
   })
 })

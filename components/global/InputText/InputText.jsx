@@ -56,7 +56,6 @@ export function InputText (props) {
         <label className={Style.BoxInput_labelActivate} style={{ marginLeft: '4px' }} htmlFor="fruit">{name}</label>
         <select
           required
-          defaultValue={'Selecciona una categoría'}
           onChange={(e) => {
             const { value } = e.target
             const isValid = value !== selectOptions[0]
@@ -66,7 +65,15 @@ export function InputText (props) {
           }}
         >
 
-          {selectOptions?.map((e, i) => <option value={e} key={i}>{e}</option>)}
+          {selectOptions?.map((e, i) => {
+            return (
+              <option
+                key={i}
+                value={e}
+                selected={value?.toLowerCase() === e.toLowerCase()}
+              >{e}</option>
+            )
+          })}
         </select>
       </div>
     )

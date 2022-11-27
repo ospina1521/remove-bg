@@ -3,3 +3,22 @@
   bottom: 12px;
   right: 12px;
 }
+
+.body {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+
+.item {
+  /* background: red; */
+  width: calc(calc(100% / 3) - 8px);
+}
+
+.img {
+  width: 100%;
+  object-fit: cover;
+  aspect-ratio: 78/109;
+  border-radius: 4px;
+}
