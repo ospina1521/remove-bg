@@ -6,6 +6,7 @@ import { ProfilePage } from './ProfilePage'
 describe.concurrent('ProfilePage', () => {
   beforeEach(() => {
     cleanup()
+    location.href = 'http://localhost:3000/profile?'
     setCookie({
       key: 'token',
       value: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1hbnVlbGxvbmRvZ25vMTMyQGdtYWlsLmNvbSIsInJvbCI6InByb3ZpZGVyIiwiaWF0IjoxNjY3NzYwMDQ2fQ.3aLKfaWFkKD4oNz3tRRChgCMonPVeIp-ZDT-EYgLsd4',

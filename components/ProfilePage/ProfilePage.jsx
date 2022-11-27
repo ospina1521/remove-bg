@@ -1,7 +1,5 @@
-import { getCookie } from '#/utils/cookies'
-import { decodeToken } from '#/utils/jsonWebToken'
+import { useGetSearchParams } from '#/utils/hooks/useGetSearchParams'
 import { Snackbar } from '@mui/material'
-import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { Button } from '../global/Button/Button'
 import { FillCircleAvatar } from '../global/CircleAvatar/FillCircleAvatar'
@@ -12,43 +10,57 @@ import { Loading } from '../global/Loading/Loading'
 import style from './Profile.module.css'
 import { createUserService } from './provider/createUser.service'
 import { updateUserService } from './provider/updateUser.service'
+import { useGetUsersByEmail } from './provider/useGetUsersByEmail/useGetUsersByEmail'
 
 /**
  * @param {Object} [props]
- * @param {boolean} [props.isNewProfile]
  * @param {string} [props.email]
  */
 export const routeProfilePage = (props) => {
-  const { isNewProfile = '', email = '' } = props ?? {}
-  return `/profile?isNewProfile=${isNewProfile}&id=${email}`
+  const { email = '' } = props ?? {}
+  return `/profile?email=${email}`
 }
 
 export const ProfilePage = () => {
-  const route = useRouter()
+  const { email } = useGetSearchParams(['email'])
 
   const [isLoading, setIsLoading] = useState(false)
+
+  const { user, getUserByEmail } = useGetUsersByEmail()
+
   const [save, setSave] = useState({
     canShow: false,
     message: ''
   })
+
   const [form, setForm] = useState({
     email: '',
     nombre: '',
     nombreEmpresa: '',
     numeroCelular: '',
-    numeroNit: ''
+    numeroNit: '',
+    urlPhoto: ''
   })
 
   useEffect(() => {
-    const token = getCookie('token')
-    const payload = decodeToken(token) ?? {}
-    const { isNewProfile } = route?.query ?? {}
+    if (!email) return
+    setForm(s => ({ ...s, email: email ?? '' }))
 
-    if (isNewProfile) return setForm(e => ({ ...e, email: '' }))
+    getUserByEmail({ email })
+  }, [email])
 
-    const { email } = payload
-    setForm(e => ({ ...e, email }))
-  }, [route])
+  useEffect(() => {
+    if (!user.properties) return
+
+    setForm({
+      email: user.properties.email,
+      urlPhoto: user.properties.urlPhoto ?? '',
+      nombre: user.properties.name ?? '',
+      nombreEmpresa: user.properties.nameCompany ?? '',
+      numeroCelular: user.properties.phone ?? '',
+      numeroNit: user.properties.nit ?? ''
+    })
+  }, [email, user.properties])
 
   /** @param {import('react').FormEvent<HTMLFormElement>} e */
   const onSubmit = async (e) => {
@@ -56,13 +68,11 @@ export const ProfilePage = () => {
     setIsLoading(true)
 
     try {
-      const { isNewProfile } = route?.query ?? {}
-
-      if (isNewProfile) {
+      if (!email) {
         await createUserService({ email: form.email, name: form.nombre, rol: 'provider' })
       }
 
-      if (!isNewProfile) {
+      if (email) {
         await updateUserService({
           email: form.email,
           name: form.nombre,
@@ -112,14 +122,45 @@ export const ProfilePage = () => {
           />
 
           <div className={style.col}>
-            <InputText type='text' value={form.nombre} placeholder='Mengano' name='Nombre' onChange={nombre => setForm(s => ({ ...s, nombre }))} />
-            <InputText type='text' value={form.numeroNit} placeholder='1.000.000-1' name='Número de nit.' onChange={numeroNit => setForm(s => ({ ...s, numeroNit }))}/>
+            <InputText
+              type='text'
+              value={form.nombre}
+              placeholder='Mengano'
+              name='Nombre'
+              onChange={nombre => setForm(s => ({ ...s, nombre }))}
+            />
+            <InputText
+              type='text'
+              value={form.numeroNit}
+              placeholder='1.000.000-1'
+              name='Número de nit.'
+              onChange={numeroNit => setForm(s => ({ ...s, numeroNit }))}
+            />
           </div>
         </div>
 
-        <InputText type='text' value={form.nombreEmpresa} placeholder='Proveedor S.A.A' name='Nombre de empresa' onChange={nombreEmpresa => setForm(s => ({ ...s, nombreEmpresa }))}/>
-        <InputText type='email' value={form.email} placeholder='Franken@Luna.com' name='Correo electrónico' isDisable={Boolean(!route?.query?.isNewProfile)} onChange={email => setForm(s => ({ ...s, email }))}/>
-        <InputText type='text' value={form.numeroCelular} placeholder='300 000 00 00' name='Número de celular' onChange={numeroCelular => setForm(s => ({ ...s, numeroCelular }))}/>
+        <InputText
+          type='text'
+          value={form.nombreEmpresa}
+          placeholder='Proveedor S.A.A'
+          name='Nombre de empresa'
+          onChange={nombreEmpresa => setForm(s => ({ ...s, nombreEmpresa }))}
+        />
+        <InputText
+          type='email'
+          value={form.email}
+          placeholder='Franken@Luna.com'
+          name='Correo electrónico'
+          isDisable={Boolean(email)}
+          onChange={email => setForm(s => ({ ...s, email }))}
+        />
+        <InputText
+          type='text'
+          value={form.numeroCelular}
+          placeholder='300 000 00 00'
+          name='Número de celular'
+          onChange={numeroCelular => setForm(s => ({ ...s, numeroCelular }))}
+        />
 
         <Button text='Guardar' type='submit' style={{ marginTop: '16px' }}/>
 

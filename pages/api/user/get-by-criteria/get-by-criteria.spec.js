@@ -1,4 +1,5 @@
 import { UserRepositorySupaBase } from '#/repository/UserRepositorySupaBase/UserRepositorySupaBase'
+import { getByCriteria } from '#/service/User/getByCriteria/getByCriteria'
 import { getToken } from '#/utils/jsonWebToken'
 import { testApiHandler } from 'next-test-api-route-handler'
 import { describe, expect, it } from 'vitest'
@@ -24,9 +25,7 @@ describe.concurrent('Get all users Endpoint', () => {
         const resp = await fetch(config)
         const json = await resp.json()
 
-        const userRepository = new UserRepositorySupaBase()
-
-        const users = await userRepository.getAllUsers()
+        const users = await getByCriteria({})
 
         expect(json).toStrictEqual(users)
       }

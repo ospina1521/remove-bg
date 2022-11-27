@@ -70,7 +70,7 @@ export const ListOfProviderPage = () => {
         })}
       </div>
 
-      <Link href={routeProfilePage({ isNewProfile: true })}>
+      <Link href={routeProfilePage()}>
         <a className={style.positionFab} >
           <FloatingActionButton icon={<AddIcon />}/>
         </a>

@@ -1,6 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 
-import { getAllProduct } from '#/service/Products/getAll/getAllProduct'
+import { getByCriteria } from '#/service/Products/getByCriteria/getByCriteria'
 
 /**
  * @param {import('next').NextApiRequest} req
@@ -15,7 +15,7 @@ export default async function handler (req, res) {
     const criteria = { category, provider, id }
 
     // @ts-ignore
-    const resp = await getAllProduct(criteria)
+    const resp = await getByCriteria(criteria)
 
     res.status(200).json(resp)
   } catch (error) {

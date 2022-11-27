@@ -2,7 +2,7 @@ import { supabase } from '#/providers/SupaBase/createClient'
 import { createSupabaseQuery } from '#/utils/createSupabaseQuery'
 
 /** @param {import("./types").SearchProductByCriteria} criteria */
-export const getAllProduct = async (criteria) => {
+export const getByCriteria = async (criteria) => {
   const query = createSupabaseQuery(criteria)
 
   const resp = await supabase

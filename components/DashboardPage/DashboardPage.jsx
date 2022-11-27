@@ -8,7 +8,6 @@ import { NotificationIcon } from '../global/icons/NotificationIcon/NotificationI
 import { ProductIcon } from '../global/icons/ProductIcon'
 import { OutLineButton } from '../global/OutLineButton/OutLineButton'
 import { routeToListOfProviderPage } from '../ListOfProviderPage/ListOfProviderPage'
-import { routeToNewProductPage } from '../NewProductPage/NewProductPage'
 import { routeToPortfolioPage } from '../PortfolioPage/PortfolioPage'
 import { routeProfilePage } from '../ProfilePage/ProfilePage'
 import style from './DashboardPage.module.css'
@@ -17,7 +16,7 @@ export const routeDashboardPage = () => '/dashboard'
 
 /** @param  {import('#/utils/jsonWebToken').Payload} props */
 export function DashboardPage (props) {
-  const { rol } = props
+  const { rol, email } = props
 
   const AdminOptions = () => {
     return (
@@ -64,7 +63,7 @@ export function DashboardPage (props) {
         <div className={style.row}>
           <FillCircleAvatar />
 
-          <Link href={routeProfilePage()}>
+          <Link href={routeProfilePage({ email })}>
             <a style={{ width: '100%', marginTop: 'auto' }} ><OutLineButton text='MI PERFIL'/></a>
           </Link>
         </div>

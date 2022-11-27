@@ -7,10 +7,10 @@ export const getAllUsersService = async () => {
     }
   }
 
-  const resp = await fetch('/api/user/all-users', config)
+  const resp = await fetch('/api/user/get-by-criteria', config)
   const json = await resp.json()
 
   if (resp.status >= 400) throw new Error(json.error)
 
-  return json
+  return json.data
 }
