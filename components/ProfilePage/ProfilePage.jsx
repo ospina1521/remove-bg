@@ -69,7 +69,14 @@ export const ProfilePage = () => {
 
     try {
       if (!email) {
-        await createUserService({ email: form.email, name: form.nombre, rol: 'provider' })
+        await createUserService({
+          email: form.email,
+          name: form.nombre,
+          rol: 'provider',
+          nit: form.numeroNit,
+          phone: form.numeroCelular,
+          company: form.nombreEmpresa
+        })
       }
 
       if (email) {

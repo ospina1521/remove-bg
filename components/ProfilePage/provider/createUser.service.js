@@ -1,10 +1,4 @@
-/**
- * @param {Object} props
- * @param {string} props.email
- * @param {string} props.name
- * @param {import("#/types").UserRol} props.rol
- * @returns
- */
+/** @param {import("./types").IUserService} props */
 export const createUserService = async (props) => {
   const { email = '', name = '', rol = '' } = props ?? {}
   if (!email || !name || !rol) throw new Error(`All props is required: ${JSON.stringify({ email, name, rol }, null, 2)}`)

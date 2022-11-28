@@ -1,19 +1,18 @@
-import { getByCriteria } from '#/service/User/getByCriteria/getByCriteria'
 import { getToken } from '#/utils/jsonWebToken'
 import { testApiHandler } from 'next-test-api-route-handler'
 import { describe, expect, it } from 'vitest'
 import handler from './index'
 
-describe.concurrent('Get all users Endpoint', () => {
-  it('should be success', async () => {
+describe.concurrent('Update Users Endpoint', () => {
+  it('should throw if cookie rol is not Admin', async () => {
     await testApiHandler({
       handler,
       test: async ({ fetch }) => {
-        const token = getToken({ email: 'hbiaser132@gmail.com', rol: 'admin' })
+        const token = getToken({ email: 'hbiaser132@gmail.com', rol: 'provider' })
 
         /** @type {RequestInit} */
         const config = {
-          method: 'GET',
+          method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
             Cookie: `token=${token}`
@@ -24,9 +23,7 @@ describe.concurrent('Get all users Endpoint', () => {
         const resp = await fetch(config)
         const json = await resp.json()
 
-        const users = await getByCriteria({})
-
-        expect(json).toStrictEqual(users)
+        expect(json).toStrictEqual({ error: 'Unauthorized' })
       }
     })
   })
