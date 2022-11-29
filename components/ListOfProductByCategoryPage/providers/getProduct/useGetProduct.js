@@ -16,6 +16,8 @@ export const useGetProduct = () => {
 
   /** @param {import('./types').ReqGetProduct} props */
   const getProduct = async (props) => {
+    if (typeof window === 'undefined') return
+
     try {
       const data = await getProductService(props)
       if (!isActiveHook) return

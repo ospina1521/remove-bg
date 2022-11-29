@@ -1,11 +1,12 @@
 :root {
   --primary-color: #bf0000;
   --max-width: 390px;
+  --background: #f5f5f5;
 }
 
 .appBox {
   /* Centered */
-  background: #f5f5f5;
+  background: var(--background);
   width: 100%;
   max-width: var(--max-width);
   margin: 0 auto;

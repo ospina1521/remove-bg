@@ -72,7 +72,7 @@ export const NewProductPage = () => {
 
       setForm(initForm)
     } catch (error) {
-      console.error('🚀 ~ file: NewProductPage.jsx ~ line 34 ~ onSubmit ~ error', error.message)
+      console.error('🚀 ~ Error Service: NewProductPage.jsx ~ line 34 ~ onSubmit ~ error', error.message)
       setIsLoading(false)
       setSave({
         canShow: true,
@@ -92,10 +92,6 @@ export const NewProductPage = () => {
         message={save.message}
       />
       <div style={{ position: 'relative' }}>
-
-        <div className={style.positionBackArrow} onClick={() => router.back()}>
-          <ProductBackArrow />
-        </div>
 
         <Carrousel listOfImages={form.images} />
 
@@ -147,7 +143,6 @@ export const NewProductPage = () => {
           MAX_WIDTH={390}
           MAX_HEIGHT={546}
           multiple={true}
-          reduceImage={false}
           className={style.positionFab}
           imageBuilder={(props) => <FloatingActionButton icon={<UploadIcon width={28} height={28} />} />}
           onChangeMultiFiles={async (props) => {
@@ -168,7 +163,12 @@ export const NewProductPage = () => {
             setForm(e => ({ ...e, images: props.map(e => e.url) }))
           }}
         />
+
+        <div className={style.positionBackArrow} onClick={() => router.back()}>
+          <ProductBackArrow />
+        </div>
       </div>
+
     </div>
   )
 }

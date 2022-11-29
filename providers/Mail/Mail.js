@@ -20,7 +20,7 @@ export const sendMail = async (props) => {
 
     await transporter.sendMail({
       from: 'automail.noresponder@gmail.com',
-      to: email,
+      to: email.toLowerCase(),
       html: message,
       subject
     })
