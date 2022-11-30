@@ -15,7 +15,7 @@ describe.concurrent('Update Users Endpoint', () => {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
-            Cookie: `token=${token}`
+            Cookie: `token="${token}"`
           }
         }
 

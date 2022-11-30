@@ -16,7 +16,7 @@ describe.concurrent('Get all users Endpoint', () => {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
-            Cookie: `token=${token}`
+            Cookie: `token="${token}"`
           }
         }
 
