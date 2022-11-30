@@ -8,9 +8,9 @@ import { ImagePicker } from '../global/ImagePicker/ImagePicker'
 import { InputText } from '../global/InputText/InputText'
 import { Loading } from '../global/Loading/Loading'
 import style from './Profile.module.css'
-import { createUserService } from './provider/createUser.service'
-import { updateUserService } from './provider/updateUser.service'
-import { useGetUsersByEmail } from './provider/useGetUsersByEmail/useGetUsersByEmail'
+import { createUserService } from './provider/postCreateUser/createUser.service'
+import { updateUserService } from './provider/postUpdateUser/postUpdateUser.service'
+import { useGetUsersByEmail } from './provider/getUsersByEmail/useGetUsersByEmail'
 
 /**
  * @param {Object} [props]

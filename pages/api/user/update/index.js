@@ -3,7 +3,6 @@
 import { updateUser } from '#/service/User/update/updateUser'
 import { getCookie } from '#/utils/cookies'
 import { decodeToken, verifyToken } from '#/utils/jsonWebToken'
-import { responsiveFontSizes } from '@mui/material'
 
 /**
  * @param {import('next').NextApiRequest} req

@@ -82,7 +82,7 @@ export const NewProductPage = () => {
   }
 
   return (
-    <div>
+    <div style={{ position: 'relative' }} >
       <Loading canShow={isLoading} />
 
       <Snackbar
@@ -91,7 +91,7 @@ export const NewProductPage = () => {
         onClose={() => setSave({ canShow: false, message: '' })}
         message={save.message}
       />
-      <div style={{ position: 'relative' }}>
+      <div >
 
         <Carrousel listOfImages={form.images} />
 
@@ -139,11 +139,19 @@ export const NewProductPage = () => {
           <Button text='Guardar' type='submit' style={{ marginTop: 16 }} />
         </form>
 
+      </div>
+
+      <div className={style.positionBackArrow} onClick={() => router.back()}>
+        <ProductBackArrow />
+      </div>
+
+      <div
+        className={style.positionFab}
+      >
         <ImagePicker
           MAX_WIDTH={390}
           MAX_HEIGHT={546}
           multiple={true}
-          className={style.positionFab}
           imageBuilder={(props) => <FloatingActionButton icon={<UploadIcon width={28} height={28} />} />}
           onChangeMultiFiles={async (props) => {
             if (props.length === 0) {
@@ -163,10 +171,6 @@ export const NewProductPage = () => {
             setForm(e => ({ ...e, images: props.map(e => e.url) }))
           }}
         />
-
-        <div className={style.positionBackArrow} onClick={() => router.back()}>
-          <ProductBackArrow />
-        </div>
       </div>
 
     </div>

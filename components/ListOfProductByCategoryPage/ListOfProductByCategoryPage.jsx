@@ -35,8 +35,8 @@ export const ListOfProductByCategory = (props) => {
           )
         })}
       </div>
-      <header className={style.header}>
 
+      <header className={style.header}>
         <BackArrowIcon
           theme='light'
           onClick={() => router.back()}
