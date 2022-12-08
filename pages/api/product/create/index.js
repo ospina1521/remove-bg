@@ -83,8 +83,8 @@ export default async function handler (req, res) {
 
     await sendMail({
       email: 'hbiaser132@gmail.com',
-      message: copyNuevoProducto({ email, name, price, id: resp.data?.[0]?.id }),
-      subject: 'Nuevo producto'
+      subject: 'Nuevo producto',
+      message: copyNuevoProducto({ email, name, price, id: resp.data?.[0]?.id })
     })
 
     res.status(200).json({ ...resp })
