@@ -1,8 +1,5 @@
-// @ts-check
-import { fileToBase64 } from '#/utils/file/fileToBase64'
-import { getSizeToBase64 } from '#/utils/file/getSizeToBase64'
-import { reduceSizeImageAsBase64 } from '#/utils/file/reduceSizeImageAsBase64'
-import { useId, useState } from 'react'
+import { memo, useId, useState } from 'react'
+import { processSingleFile } from './func/singleFile'
 
 /** @param {import('./types').Prop} props */
 export function ImagePicker (props) {
@@ -16,6 +13,7 @@ export function ImagePicker (props) {
     multiple = false,
     initialImage = '',
     reduceImage = true,
+    onChangeSingleFiles = () => {},
     imageBuilder: ImageBuilder = () => <></>,
     onChangeMultiFiles = () => {}
   } = props
@@ -23,6 +21,10 @@ export function ImagePicker (props) {
   /** @type {import('./types').InitStateFile} */
   const initSingleStateFile = { url: initialImage?.toString(), file: null, size: '0' }
   const [singleFile, setSingleFile] = useState(initSingleStateFile)
+
+  const Memo = memo(function Name () {
+    return <ImageBuilder url={singleFile.url || initialImage} file={singleFile.file} size={singleFile.size}/>
+  })
 
   return (
     <label
@@ -36,19 +38,13 @@ export function ImagePicker (props) {
         if (!multiple) {
           try {
             const file = filesPrimitive[0]
-            const originBase64 = await fileToBase64(file)
-            const originSize = getSizeToBase64(originBase64)
+            const { base64, size } = await processSingleFile(file, { MAX_HEIGHT, MAX_WIDTH, reduceImage: true })
 
-            const reducedBase64 = await reduceSizeImageAsBase64({
-              MAX_HEIGHT,
-              MAX_WIDTH,
-              base64: originBase64
+            onChangeSingleFiles({
+              file,
+              size,
+              url: base64
             })
-            const reducedSize = getSizeToBase64(reducedBase64)
-
-            const base64 = reduceImage ? reducedBase64 : originBase64
-
-            const size = reduceImage ? reducedSize : originSize
 
             setSingleFile({
               file,
@@ -56,37 +52,30 @@ export function ImagePicker (props) {
               url: base64
             })
           } catch (error) {
-            console.log({ error: error.message })
+            console.error('🚀 ~ file: ImagePicker.jsx:45 ~ onChange', error.message)
           }
         }
 
         if (multiple) {
-          const filesPromise = Object.values(filesPrimitive).map(async e => {
-            const originBase64 = await fileToBase64(e)
-            const originSize = getSizeToBase64(originBase64)
-
-            const reducedBase64 = await reduceSizeImageAsBase64({
-              MAX_HEIGHT,
-              MAX_WIDTH,
-              base64: originBase64
+          try {
+            const filesPromise = Object.values(filesPrimitive).map(async e => {
+              const resp = await processSingleFile(e, { MAX_HEIGHT, MAX_WIDTH, reduceImage })
+              return { ...resp, file: e }
             })
-            const reducedSize = getSizeToBase64(reducedBase64)
 
-            const base64 = reduceImage ? reducedBase64 : originBase64
+            const files = (await Promise.all(filesPromise))
+              .map(e => ({ size: e.size, file: e.file, url: e.base64 }))
 
-            const size = reduceImage ? reducedSize : originSize
-            return { base64, size, file: e }
-          })
-
-          const files = (await Promise.all(filesPromise))
-            .map(e => ({ size: e.size, file: e.file, url: e.base64 }))
-
-          onChangeMultiFiles(files)
+            onChangeMultiFiles(files)
+          } catch (error) {
+            console.error('🚀 ~ file: ImagePicker.jsx:62 ~ onChange', error.message)
+          }
         }
       }}
     >
 
-      <ImageBuilder url={singleFile.url} file={singleFile.file} size={singleFile.size}/>
+      {/* <ImageBuilder url={singleFile.url || initialImage} file={singleFile.file} size={singleFile.size}/> */}
+      <Memo />
 
       <input
         max={3}

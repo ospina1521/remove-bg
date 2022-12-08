@@ -86,7 +86,8 @@ export const ProfilePage = () => {
           rol: 'provider',
           nit: form.numeroNit,
           phone: form.numeroCelular,
-          company: form.nombreEmpresa
+          company: form.nombreEmpresa,
+          urlPhoto: form.urlPhoto
         })
       }
 
@@ -120,12 +121,18 @@ export const ProfilePage = () => {
       <form className={style.body} onSubmit={onSubmit}>
 
         <div className={style.row}>
-          <ImagePicker className={style.img} imageBuilder={(props) => {
-            const { url } = props
+          <ImagePicker
+            initialImage={user.properties?.urlPhoto}
+            className={style.img}
+            onChangeSingleFiles={({ url }) => {
+              setForm(e => ({ ...e, urlPhoto: url }))
+            }}
+            imageBuilder={(props) => {
+              const { url } = props
 
-            if (!url) return <FillCircleAvatar isEditable={true} />
-            return <img src={url} alt='123' className={style.img}/>
-          }}
+              if (!url) return <FillCircleAvatar isEditable={true} />
+              return <img src={url} alt='123' className={style.img}/>
+            }}
           />
 
           <div className={style.col}>

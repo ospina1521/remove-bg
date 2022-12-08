@@ -9,6 +9,7 @@ export interface Prop {
   accept?: string // type only images extensions, doc -> https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/accept
   multiple?: boolean // doc -> https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/multiple
   onChangeMultiFiles?: (props: Array<IonChange>) => void
+  onChangeSingleFiles?: (props: IonChange) => void
 }
 
 export interface InitStateFile {

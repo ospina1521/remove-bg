@@ -1,8 +1,8 @@
 /** @param {import("../postCreateUser/types").IUserService} props */
 export const updateUserService = async (props) => {
-  const { email = '', company: nameCompany = '', name = '', rol = '', nit = '', phone = '' } = props ?? {}
+  const { email = '', company: nameCompany = '', name = '', rol = '', nit = '', phone = '', urlPhoto = '' } = props ?? {}
   console.log('🚀 ~ file: updateUser.service.js ~ line 4 ~ updateUserService ~ props', props)
-  if (!email || !nameCompany || !name || !rol || !nit || !phone) throw new Error(`All props is required: ${JSON.stringify({ email, company: nameCompany, name, rol, nit, phone }, null, 2)}`)
+  if (!email) throw new Error('Email is required')
 
   /** @return {RequestInit} */
   const config = {
@@ -15,7 +15,8 @@ export const updateUserService = async (props) => {
       name,
       rol,
       nit,
-      phone
+      phone,
+      urlPhoto
     })
   }
 

@@ -25,6 +25,7 @@
   height: 125px;
   border-radius: 100px;
   background: #fff;
+  object-fit: cover;
 
   /* height: 26px; */
 }

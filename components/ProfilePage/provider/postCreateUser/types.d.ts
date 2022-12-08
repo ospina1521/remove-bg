@@ -7,4 +7,5 @@ export interface IUserService {
   nit: string;
   phone: string;
   company: string;
+  urlPhoto?: string;
 }

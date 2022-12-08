@@ -1,8 +1,11 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 
+import { supabase } from '#/providers/SupaBase/createClient'
 import { updateUser } from '#/service/User/update/updateUser'
 import { getCookie } from '#/utils/cookies'
 import { decodeToken, verifyToken } from '#/utils/jsonWebToken'
+import { decode } from 'base64-arraybuffer'
+import { v4 } from 'uuid'
 
 /**
  * @param {import('next').NextApiRequest} req
@@ -26,11 +29,18 @@ export default async function handler (req, res) {
     /** @type {import('./types').IRequestBody} */
     const { name, nameCompany, nit, phone, urlPhoto, rol } = req.body
 
-    const user = { name, nameCompany, nit, phone, urlPhoto, rol }
+    const urlImage = await getUrlImage(urlPhoto)
+
+    const user = {
+      name,
+      nameCompany,
+      nit,
+      phone,
+      rol,
+      urlPhoto: urlImage
+    }
 
     const resp = await updateUser(email, user)
-
-    res.status(200).json({ ...resp })
 
     if (resp.error?.message) throw new Error(resp.error?.message)
 
@@ -38,4 +48,20 @@ export default async function handler (req, res) {
   } catch (error) {
     res.status(400).json({ error: error.message })
   }
+}
+
+const getUrlImage = async (urlPhoto = '') => {
+  if (urlPhoto.includes('https://')) return urlPhoto
+
+  const urlBase = 'https://wtfzbttwmkofjtobyckk.supabase.co/storage/v1/object/public/products/'
+
+  const { data } = await supabase.storage
+    .from('products')
+    .upload(
+        `public/${v4()}.${urlPhoto.split(';')[0].replace('data:', '').split('/')[1]}`,
+        decode(urlPhoto.replace(/data.*,/, '')),
+        { contentType: urlPhoto.split(';')[0].replace('data:', '') }
+    )
+
+  return urlBase + data?.path
 }

@@ -1,5 +1,4 @@
 import { useRouter } from 'next/router'
-import { BurgerMenu } from '../BurgerMenu/BurgerMenu'
 import { BackArrowIcon } from '../icons/BackArrow/BackArrow'
 import { Logo } from '../Logo/Logo'
 import style from './Header.module.css'
@@ -11,7 +10,7 @@ import style from './Header.module.css'
  * @param {boolean} [props.burgerMenuEnable]
  */
 export const Header = (props) => {
-  const { arrowBackEnable = true, burgerMenuEnable = false, title = 'PANEL' } = props
+  const { title = 'PANEL' } = props
 
   const router = useRouter()
   return (

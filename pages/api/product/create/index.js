@@ -1,6 +1,8 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 
 import { credentials } from '#/credentials'
+import { sendMail } from '#/providers/Mail/Mail'
+import { copyNuevoProducto } from '#/providers/Mail/templates/nuevoProducto'
 import { supabase } from '#/providers/SupaBase/createClient'
 import { createProduct } from '#/service/Products/create/createProducto'
 import { getCookie } from '#/utils/cookies'
@@ -34,43 +36,43 @@ export default async function handler (req, res) {
       category
     } = req.body
 
-    const listPromisesOfRemoveBG = images
-      .map(
-        e =>
-          removeBackgroundFromImageBase64({
-            base64img: e,
-            apiKey: credentials.removeBgKey,
-            size: 'regular'
-          })
-      )
+    // const listPromisesOfRemoveBG = images
+    //   .map(
+    //     e =>
+    //       removeBackgroundFromImageBase64({
+    //         base64img: e,
+    //         apiKey: credentials.removeBgKey,
+    //         size: 'regular'
+    //       })
+    //   )
 
-    const imagesWithoutBG = await Promise.all(listPromisesOfRemoveBG)
+    // const imagesWithoutBG = await Promise.all(listPromisesOfRemoveBG)
 
-    const listPromisesOfUploadImages = imagesWithoutBG
-      .map(
-        (e, i) => {
-          return supabase.storage
-            .from('products')
-            .upload(
-              `public/${v4()}.png`,
-              decode(e.base64img),
-              { contentType: 'image/png' }
-            )
-        }
-      )
+    // const listPromisesOfUploadImages = imagesWithoutBG
+    //   .map(
+    //     (e, i) => {
+    //       return supabase.storage
+    //         .from('products')
+    //         .upload(
+    //           `public/${v4()}.png`,
+    //           decode(e.base64img),
+    //           { contentType: 'image/png' }
+    //         )
+    //     }
+    //   )
 
-    const urlImages = await Promise.all(listPromisesOfUploadImages)
+    // const urlImages = await Promise.all(listPromisesOfUploadImages)
 
-    const _img = urlImages.map(e => {
-      if (e.error) throw new Error('Error al guardar una imagen')
+    // const _img = urlImages.map(e => {
+    //   if (e.error) throw new Error('Error al guardar una imagen')
 
-      const urlBase = 'https://wtfzbttwmkofjtobyckk.supabase.co/storage/v1/object/public/products/'
+    //   const urlBase = 'https://wtfzbttwmkofjtobyckk.supabase.co/storage/v1/object/public/products/'
 
-      return urlBase + e.data?.path
-    })
+    //   return urlBase + e.data?.path
+    // })
 
     const resp = await createProduct({
-      images: _img,
+      // images: _img,
       code,
       name,
       price,
@@ -80,6 +82,12 @@ export default async function handler (req, res) {
     })
 
     if (resp.error?.message) throw new Error(resp.error?.message)
+
+    await sendMail({
+      email: 'hbiaser132@gmail.com',
+      message: copyNuevoProducto({ email, name, price, id: resp.data?.[0]?.id }),
+      subject: 'Nuevo producto'
+    })
 
     res.status(200).json({ ...resp })
   } catch (error) {

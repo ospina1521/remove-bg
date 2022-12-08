@@ -1,6 +1,6 @@
 export interface IRequestBody {
   name: string;
-  urlPhoto: any;
+  urlPhoto: string;
   rol: string;
   nameCompany: string;
   phone: string;
