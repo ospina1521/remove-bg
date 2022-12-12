@@ -30,7 +30,7 @@ export const ListOfProductByCategory = (props) => {
         {products.map((e, i) => {
           return (
             <div key={i} >
-              <Product name={e.name} price={e.price} images={e.images}/>
+              <Product id={e.id} name={e.name} price={e.price} images={e.images}/>
             </div>
           )
         })}

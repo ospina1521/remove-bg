@@ -5,6 +5,8 @@ import { Loading } from '../global/Loading/Loading'
 import { useGetProduct } from './providers/getProductById/useGetProductByIdService'
 import style from './NewProductPage.module.css'
 import { useGetSearchParams } from '#/utils/hooks/useGetSearchParams'
+import { ProductBackArrow } from '../global/ProductArrowBack'
+import { useRouter } from 'next/router'
 
 export const routeToReadOnlyProductPage = (id = '') => `/view-product?id=${id}`
 
@@ -22,7 +24,7 @@ export const ReadOnlyProductPage = () => {
   }
   const [form, setForm] = useState(initForm)
   const { product, getProductById } = useGetProduct()
-
+  const router = useRouter()
   const { id } = useGetSearchParams(['id'])
 
   useEffect(() => {
@@ -100,6 +102,9 @@ export const ReadOnlyProductPage = () => {
 
       </div>
 
+      <div className={style.positionBackArrow} onClick={() => router.back()}>
+        <ProductBackArrow />
+      </div>
     </div>
   )
 }

@@ -11,6 +11,8 @@ import style from './Profile.module.css'
 import { createUserService } from './provider/postCreateUser/createUser.service'
 import { updateUserService } from './provider/postUpdateUser/postUpdateUser.service'
 import { useGetUsersByEmail } from './provider/getUsersByEmail/useGetUsersByEmail'
+import Link from 'next/link'
+import { routeToReadOnlyPortfolioPage } from '../PortfolioPage/ReadOnlyPortfolioPage'
 
 /**
  * @param {Object} [props]
@@ -176,8 +178,18 @@ export const ProfilePage = () => {
           onChange={numeroCelular => setForm(s => ({ ...s, numeroCelular }))}
         />
 
-        <Button text='Guardar' type='submit' style={{ marginTop: '16px' }}/>
+        <div style={{ display: 'flex', marginTop: '16px', justifyContent: 'space-evenly' }}>
 
+          {user.properties?.rol === 'provider' &&
+            <Link href={routeToReadOnlyPortfolioPage(email)}>
+              <a>
+                <Button text='Ver Productos' />
+              </a>
+            </Link>
+          }
+
+          <Button text='Guardar' type='submit' style={{ margin: 0 }}/>
+        </div>
       </form>
     </>
   )

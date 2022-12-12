@@ -1,15 +1,11 @@
 import style from './OutLineButton.module.css'
 
-/**
- * @param {Object} props
- * @param {JSX.Element} [props.icon]
- * @param {string} props.text
- */
+/** @param {import('./types').Props} props */
 export const OutLineButton = (props) => {
-  const { icon = <></>, text = '' } = props
+  const { icon = <></>, text = '', ...others } = props
 
   return (
-    <div className={style.button}>
+    <div className={style.button} {...others}>
       <span>{icon}</span>
       <p>{text}</p>
       <svg
@@ -17,7 +13,6 @@ export const OutLineButton = (props) => {
         height={7}
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        {...props}
       >
         <path
           opacity={0.45}

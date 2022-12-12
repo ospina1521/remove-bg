@@ -25,9 +25,9 @@ export default async function handler (req, res) {
   try {
     if (req.method !== 'GET') throw new Error('Method should be GET')
 
-    const { email } = req.query
+    const { email, rol } = req.query
 
-    const criteria = { email }
+    const criteria = { email, rol }
 
     // @ts-ignore
     const resp = await getByCriteria(criteria)

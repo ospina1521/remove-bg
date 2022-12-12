@@ -30,3 +30,10 @@
   flex-direction: column;
   gap: 8px;
 }
+
+.img {
+  width: 124px;
+  height: 124px;
+  border-radius: 100px;
+  object-fit: cover;
+}

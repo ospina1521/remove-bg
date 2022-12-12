@@ -27,7 +27,7 @@ export default async function handler (req, res) {
     if (!email || typeof email !== 'string') throw new Error('email query is required')
 
     /** @type {import('./types').IRequestBody} */
-    const { name, nameCompany, nit, phone, urlPhoto, rol } = req.body
+    const { name, nameCompany, nit, phone, urlPhoto } = req.body
 
     const urlImage = await getUrlImage(urlPhoto)
 
@@ -36,7 +36,6 @@ export default async function handler (req, res) {
       nameCompany,
       nit,
       phone,
-      rol,
       urlPhoto: urlImage
     }
 

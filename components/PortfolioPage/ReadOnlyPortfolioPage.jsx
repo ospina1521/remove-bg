@@ -1,18 +1,22 @@
+import { useGetSearchParams } from '#/utils/hooks/useGetSearchParams'
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { Header } from '../global/Header/Header'
 import { routeToNewProductPage } from '../NewProductPage/NewProductPage'
 import style from './PortfolioPage.module.css'
-import { useGetAllProducts } from './provider/getAllProduct/useGetAllProducts'
+import { useGetProductByProvider } from './provider/getProductByProvider/useGetProductByProvider'
 
-export const routeToReadOnlyPortfolioPage = () => '/all-portfolio'
+export const routeToReadOnlyPortfolioPage = (email = '') => `/all-portfolio?email=${email}`
 
 export const ReadOnlyPortfolioPage = () => {
-  const { getAllProducts, product } = useGetAllProducts()
+  const { getProductByProvider, product } = useGetProductByProvider()
+
+  const { email } = useGetSearchParams(['email'])
 
   useEffect(() => {
-    getAllProducts()
-  }, [])
+    // @ts-ignore
+    getProductByProvider({ provider: email })
+  }, [email])
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
