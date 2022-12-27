@@ -111,10 +111,10 @@ describe.concurrent('EnterEmailController', () => {
 
         // @ts-ignore
         const resp = await fetch(config)
-        const json = await resp.json()
+        const { token, ...rest } = await resp.json()
 
         expect(resp.status).toBe(200)
-        expect(json).toStrictEqual({ error: null, code: null })
+        expect(rest).toStrictEqual({ error: null, code: null })
       }
     })
   })

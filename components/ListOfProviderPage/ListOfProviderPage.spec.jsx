@@ -21,8 +21,8 @@ describe.concurrent('ListOfProviderPage', () => {
     screen.getByTestId('fab-icon')
   })
 
-  it('should render a provider item', () => {
-    render(<ListOfProviderPage/>)
-    screen.findAllByTestId('')
-  })
+  // it('should render a provider item', () => {
+  //   render(<ListOfProviderPage/>)
+  //   screen.findAllByTestId('')
+  // })
 })
