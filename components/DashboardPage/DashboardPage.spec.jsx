@@ -23,8 +23,7 @@ describe.concurrent('dashboard', () => {
   it.each([
     { text: 'MI PERFIL', icon: null },
     { text: 'GESTIÓN DE PROVEEDORES', icon: 'icon-notification' },
-    { text: 'NUEVOS PRODUCTOS', icon: 'icon-chart' },
-    { text: 'ANÁLISIS DE MÉTRICAS', icon: 'icon-bell' }
+    { text: 'PRODUCTOS', icon: 'icon-chart' }
   ])('should render bottom "%s" to admin rol', (props) => {
     const { icon, text } = props
     render(<DashboardPage email='hbiaser132@gmail.com' rol='admin' />)

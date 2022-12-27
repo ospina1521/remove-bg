@@ -1,17 +1,11 @@
-/**
- * @param {import('./types').Props} props
- * @return {Promise<import('./types').Product>}
- * */
-export const getProductByIdService = async (props) => {
-  const { id } = props
-
+export const deleteProductByIdService = async (/** @type {string} */id) => {
   /** @type {RequestInit} */
   const config = {
-    method: 'GET',
+    method: 'DELETE',
     headers: { 'Content-type': 'application/json' }
   }
 
-  const url = new URL(location.origin + '/api/product/get-by-criteria')
+  const url = new URL(location.origin + '/api/product/delete')
   url.search = new URLSearchParams({
     id: id.toString(),
     isVisible: 'false'
@@ -19,10 +13,7 @@ export const getProductByIdService = async (props) => {
 
   const resp = await fetch(url, config)
 
-  /** @type {import('./types').RespGetProductByIdService} */
   const json = await resp.json()
 
   if (resp.status >= 400) throw new Error(`Ocurrió un error al hacer la petición: ${json.error}`)
-
-  return json.data[0]
 }

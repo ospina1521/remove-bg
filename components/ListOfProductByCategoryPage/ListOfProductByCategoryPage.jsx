@@ -1,4 +1,4 @@
-import { credentials } from '#/credentials'
+import { ENV } from '#/env'
 import { useEffect } from 'react'
 import { Product } from '../global/Product/Product'
 import { useGetProduct } from './providers/getProduct/useGetProduct'
@@ -17,7 +17,7 @@ export const ListOfProductByCategory = (props) => {
   const { category } = useGetSearchParams(['category'])
 
   let { products, getProduct } = useGetProduct()
-  products = credentials.isTestMode ? testListProducts : products
+  products = ENV.isTestMode ? testListProducts : products
 
   useEffect(() => {
     if (!category) return

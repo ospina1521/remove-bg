@@ -18,7 +18,8 @@ export function InputText (props) {
     selectOptions = [],
     autoComplete = 'off',
     isDisable = false,
-    onChange = () => {}
+    onChange = () => {},
+    readOnly = false
   } = props
 
   const [activate, setActivate] = useState(false)
@@ -86,6 +87,7 @@ export function InputText (props) {
       </label>
 
       <input
+        readOnly={readOnly}
         id={name}
         type={type}
         name={name}

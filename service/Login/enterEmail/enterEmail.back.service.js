@@ -1,7 +1,8 @@
-import { credentials } from '#/credentials'
+import { ENV } from '#/env'
 import { sendMail } from '#/providers/Mail/Mail'
 import { UserRepositorySupaBase } from '#/repository/UserRepositorySupaBase/UserRepositorySupaBase'
 import { generateCode7D } from '#/utils/generateCode7D'
+import { getToken } from '#/utils/jsonWebToken'
 import { validate } from 'email-validator'
 import memoryCache from 'memory-cache'
 
@@ -35,7 +36,15 @@ export const enterEmailBackService = async (email) => {
     subject: `${code} - código de verificación de SOROPA`
   })
 
+  const token = getToken({
+    email,
+    rol: user.rol
+  })
+
   // El código solo debe ser visible en modo desarrollo y en modo de pruebas
   // con la finalidad de que los test unitarios pasen exitosamente
-  return credentials.isDevMode ? code : null
+  return {
+    token,
+    code: ENV.isDevMode ? code : null
+  }
 }

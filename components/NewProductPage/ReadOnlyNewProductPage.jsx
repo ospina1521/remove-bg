@@ -18,9 +18,12 @@ export const ReadOnlyProductPage = () => {
     images: [],
     code: '',
     name: '',
-    price: '',
-    quantity: '',
-    category: ''
+    category: '',
+    quantityAvailable: '',
+    priceCost: '',
+    priceSale: '',
+    brand: '',
+    size: ''
   }
   const [form, setForm] = useState(initForm)
   const { product, getProductById } = useGetProduct()
@@ -52,9 +55,9 @@ export const ReadOnlyProductPage = () => {
 
         <Carrousel listOfImages={form.images} />
 
-        <form className={style.fields} >
+        <form className={style.fields}>
           <InputText
-            isDisable
+            readOnly
             value={form.code}
             type='text'
             name='Código'
@@ -63,39 +66,39 @@ export const ReadOnlyProductPage = () => {
           />
 
           <InputText
-            isDisable
+            readOnly
             value={form.name}
             type='text'
-            name='Nombre'
+            name='Nombre de artículo'
             placeholder='Camiseta'
             onChange={name => setForm(e => ({ ...e, name }))}
           />
 
           <InputText
-            isDisable
+            readOnly
+            value={form.name}
             type='text'
-            value={form.price}
+            name='Marca'
+            placeholder='BLOW UP'
+            onChange={brand => setForm(e => ({ ...e, brand }))}
+          />
+
+          <InputText
+            readOnly
+            type='text'
+            value={form.priceSale}
             name='Precio'
-            placeholder='30.000'
-            onChange={price => setForm(e => ({ ...e, price }))}
+            placeholder='20.000'
+            onChange={priceSale => setForm(e => ({ ...e, priceSale }))}
           />
 
           <InputText
-            isDisable
-            value={form.quantity}
+            readOnly
+            value={form.size}
             type='text'
-            name='Cantidad'
-            placeholder='10'
-            onChange={quantity => setForm(e => ({ ...e, quantity }))}
-          />
-
-          <InputText
-            isDisable
-            value={form.category}
-            type='select'
-            name={'Categoría'}
-            selectOptions={['Selecciona una categoría', 'Mujer', 'Hombre', 'Marcas', 'Rebajas']}
-            onChange={category => setForm(e => ({ ...e, category: category.toLocaleLowerCase() }))}
+            name='Talla'
+            placeholder='s, m, l, xl, xxl'
+            onChange={size => setForm(e => ({ ...e, size }))}
           />
 
         </form>

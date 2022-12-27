@@ -1,4 +1,5 @@
-export const credentials = {
+export const ENV = {
+  adminEmail: 'hbiaser132@gmail.com',
   isDevMode: process.env.NODE_ENV === 'test' || process.env.NODE_ENV === 'development',
   isTestMode: process.env.NODE_ENV === 'test',
   removeBgKey: process.env.REMOVE_BG_KEY ?? '',

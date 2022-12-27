@@ -28,10 +28,25 @@ describe.concurrent('NewProductPage', () => {
 
   it.each([
     'Código',
-    'Nombre',
-    'Precio',
-    'Cantidad'
+    'Nombre de artículo',
+    'Marca',
+    'Precio costo',
+    'Precio venta',
+    'Cantidad disponible',
+    'Talla'
   ])('should render input "%s" ', (props) => {
     screen.getByLabelText(props)
+  })
+
+  it('should render a button to save product', () => {
+    screen.getByText('Guardar')
+  })
+
+  it('should render a button to remove product', () => {
+    cleanup()
+    document.location.href = 'http://localhost:3000/portfolio?id=123'
+    render(<NewProductPage />)
+
+    screen.getByText('Eliminar')
   })
 })

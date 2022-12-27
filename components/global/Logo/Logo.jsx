@@ -1,3 +1,4 @@
+import { routeToHomePage } from '#/components/HomePage/HomePage'
 import Link from 'next/link'
 import style from './Logo.module.css'
 /** @param {import('./types').Props} props */
@@ -26,7 +27,7 @@ export const Logo = (props) => {
   }
 
   return (
-    <Link href='/' >
+    <Link href={routeToHomePage()} >
       <a className={style.box}>
         <svg
           data-testid='logo'

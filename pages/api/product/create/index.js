@@ -1,4 +1,4 @@
-import { credentials } from '#/credentials'
+import { ENV } from '#/env'
 import { sendMail } from '#/providers/Mail/Mail'
 import { copyNuevoProducto } from '#/providers/Mail/templates/nuevoProducto'
 import { supabase } from '#/providers/SupaBase/createClient'
@@ -39,7 +39,7 @@ export default async function handler (req, res) {
         e =>
           removeBackgroundFromImageBase64({
             base64img: e,
-            apiKey: credentials.removeBgKey,
+            apiKey: ENV.removeBgKey,
             size: 'regular'
           })
       )
@@ -82,7 +82,7 @@ export default async function handler (req, res) {
     if (resp.error?.message) throw new Error(resp.error?.message)
 
     await sendMail({
-      email: 'hbiaser132@gmail.com',
+      email: ENV.adminEmail,
       subject: 'Nuevo producto',
       message: copyNuevoProducto({ email, name, price, id: resp.data?.[0]?.id })
     })

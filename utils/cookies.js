@@ -29,10 +29,7 @@ export function setCookie ({ key, value, days, context }) {
  * */
 export function getCookie (key, context) {
   try {
-    const cookie = context ??
-    (function () {
-      if (typeof window.document !== 'undefined') return document?.cookie
-    })()
+    const cookie = context ?? (typeof document !== 'undefined' ? document.cookie : '')
 
     if (!key) throw new Error('key param is required')
 

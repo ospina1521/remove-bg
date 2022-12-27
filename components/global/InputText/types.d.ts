@@ -2,6 +2,7 @@ import { InputHTMLAttributes } from "react";
 
 export interface Props {
   name: string;
+  readOnly?: boolean;
   value?: string;
   regExp?: RegExp;
   isValid?: boolean;

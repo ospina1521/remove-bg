@@ -16,8 +16,12 @@ export interface Product {
   images: string[]
   code: string
   name: string
-  price: string
   category: string
-  quantity: string
   provider: string
+  // 
+  quantityAvailable: string
+  priceCost: string
+  priceSale: string
+  brand: string
+  size: string
 }

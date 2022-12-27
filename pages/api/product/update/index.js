@@ -1,6 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 
-import { credentials } from '#/credentials'
+import { ENV } from '#/env'
 import { supabase } from '#/providers/SupaBase/createClient'
 import { updateProduct } from '#/service/Products/update/updateProducto'
 import { getCookie } from '#/utils/cookies'
@@ -43,7 +43,7 @@ export default async function handler (req, res) {
         e =>
           removeBackgroundFromImageBase64({
             base64img: e,
-            apiKey: credentials.removeBgKey,
+            apiKey: ENV.removeBgKey,
             size: 'regular'
           })
       )

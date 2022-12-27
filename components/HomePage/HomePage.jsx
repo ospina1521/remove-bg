@@ -1,4 +1,5 @@
 import { getCookie } from '#/utils/cookies'
+import { useEffectProtectRoute } from '#/utils/hooks/useEffectProtectRoute'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
@@ -13,11 +14,13 @@ import { routeToListOfProductByCategory } from '../ListOfProductByCategoryPage/L
 import { routeEnterEmailPage } from '../LoginPage/EnterEmail/EnterEmailPage'
 import style from './HomePage.module.css'
 
-export const routeToHomePage = () => '/'
+export const routeToHomePage = () => '/home'
 
 export const HomePage = () => {
   const router = useRouter()
   const [isLoading, setIsLoading] = useState(false)
+
+  useEffectProtectRoute()
 
   const onClickHandler = async () => {
     setIsLoading(true)

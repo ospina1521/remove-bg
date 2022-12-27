@@ -9,11 +9,6 @@ describe.concurrent('EnterEmailPage', () => {
     render(<EnterEmailPage />)
   })
 
-  it(' should render BurgerMenu', () => {
-    render(<EnterEmailPage />)
-    screen.getByTestId('backArrowIcon')
-  })
-
   it(' should render Logo', () => {
     render(<EnterEmailPage />)
     screen.getByTestId('logo')

@@ -1,3 +1,3 @@
-import { HomePage } from '#/components/HomePage/HomePage'
+import { EnterEmailPage } from '#/components/LoginPage/EnterEmail/EnterEmailPage'
 
-export default HomePage
+export default EnterEmailPage

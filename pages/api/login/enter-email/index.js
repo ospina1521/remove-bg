@@ -1,5 +1,3 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-
 import { enterEmailBackService } from '#/service/Login/enterEmail/enterEmail.back.service'
 
 /**
@@ -15,9 +13,9 @@ export default async function EnterEmailController (req, res) {
   }
 
   try {
-    const code = (await services[req.method]()) ?? null
+    const { code, token } = (await services[req.method]()) ?? null
 
-    res.status(200).json({ error: null, code })
+    res.status(200).json({ error: null, token, code })
   } catch (error) {
     res.status(400).json({ error: error.message })
   }

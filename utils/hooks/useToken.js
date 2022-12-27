@@ -3,19 +3,25 @@ import { getCookie } from '../cookies'
 import { decodeToken } from '../jsonWebToken'
 
 export const useToken = () => {
-  const [token, setToken] = useState({
+  const initToken = {
     email: '',
     /** @type {null | 'admin' | 'provider'} */
     rol: null
-  })
+  }
+  const [token, setToken] = useState(initToken)
 
   useEffect(() => {
     if (!window) return
-    const token = getCookie('token')
 
-    const { email, rol } = decodeToken(token)
+    try {
+      const token = getCookie('token')
 
-    setToken({ email, rol })
+      const { email, rol } = decodeToken(token)
+
+      setToken({ email, rol })
+    } catch (error) {
+      setToken(initToken)
+    }
   }, [])
 
   return token

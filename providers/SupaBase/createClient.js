@@ -1,4 +1,4 @@
-import { credentials } from '#/credentials'
+import { ENV } from '#/env'
 import { createClient } from '@supabase/supabase-js'
 
 export const supabase = createClient(

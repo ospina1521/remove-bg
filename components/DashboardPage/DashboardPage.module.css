@@ -37,3 +37,8 @@
   border-radius: 100px;
   object-fit: cover;
 }
+
+.col {
+  display: flex;
+  flex-direction: column;
+}

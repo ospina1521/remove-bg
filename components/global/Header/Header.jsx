@@ -10,13 +10,13 @@ import style from './Header.module.css'
  * @param {boolean} [props.burgerMenuEnable]
  */
 export const Header = (props) => {
-  const { title = 'PANEL' } = props
+  const { title = 'PANEL', arrowBackEnable = true } = props
 
   const router = useRouter()
   return (
     <header className={style.header}>
-      <span>
-        {/* arrowBackEnable && */ <BackArrowIcon onClick={() => router.back()} />}
+      <span style={{ width: '34px' }} >
+        {arrowBackEnable && <BackArrowIcon onClick={() => router.back()} />}
         {/* {burgerMenuEnable && <BurgerMenu />} */}
       </span>
       <p>{title}</p>

@@ -17,3 +17,23 @@
   margin: 24px;
   margin-bottom: 80px;
 }
+
+.modal {
+  padding: 24px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+
+  /* gap: 12px; */
+  max-width: calc(var(--max-width) * 0.7);
+  width: 100%;
+  background-color: #fff;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.modal h2 {
+  margin: 0;
+}

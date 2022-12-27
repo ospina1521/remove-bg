@@ -4,7 +4,6 @@ import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { FillCircleAvatar } from '../global/CircleAvatar/FillCircleAvatar'
 import { Header } from '../global/Header/Header'
-import { BellIcon } from '../global/icons/BellIcon'
 import { CartIcon } from '../global/icons/CartIcon/CartIcon'
 import { ChartIcon } from '../global/icons/ChartIcon/ChartIcon'
 import { CloseSessionIcon } from '../global/icons/CloseSession/CloseSession'
@@ -43,23 +42,21 @@ export function DashboardPage (props) {
 
         <Link href={routeToReadOnlyPortfolioPage()}>
           <a >
-            <OutLineButton icon={<ChartIcon/>} text='NUEVOS PRODUCTOS'/>
+            <OutLineButton icon={<ChartIcon/>} text='PRODUCTOS'/>
           </a>
         </Link>
-
-        <OutLineButton icon={<BellIcon/>} text='ANÁLISIS DE MÉTRICAS'/>
 
         <OutLineButton
           text='CERRAR SESIÓN'
           icon={<CloseSessionIcon/>}
           onClick={() => {
-            router.push('/')
-
             setCookie({
               days: 0,
               key: 'token',
               value: ''
             })
+
+            router.push('/')
           }}
         />
       </div>
@@ -100,7 +97,7 @@ export function DashboardPage (props) {
   return (
     <div className='mainBox'>
 
-      <Header burgerMenuEnable={true} arrowBackEnable={false} />
+      <Header burgerMenuEnable={true} arrowBackEnable={true} />
 
       <div className={style.body}>
 

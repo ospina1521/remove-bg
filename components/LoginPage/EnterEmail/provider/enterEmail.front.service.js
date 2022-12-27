@@ -16,4 +16,6 @@ export const enterEmailService = async (email) => {
   const body = await resp.json()
 
   if (resp.status > 400) throw new Error(body?.error ?? 'Error desconocido')
+
+  return body
 }

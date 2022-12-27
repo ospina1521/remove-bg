@@ -1,6 +1,8 @@
 import { useGetSearchParams } from '#/utils/hooks/useGetSearchParams'
+import { ListItemButton, ListItemText } from '@mui/material'
 import Link from 'next/link'
 import { useEffect } from 'react'
+import { Button } from '../global/Button/Button'
 import { Header } from '../global/Header/Header'
 import { routeToNewProductPage } from '../NewProductPage/NewProductPage'
 import style from './PortfolioPage.module.css'
@@ -27,10 +29,17 @@ export const ReadOnlyPortfolioPage = () => {
         {product.properties?.map((e, i) => {
           return (
             <Link href={routeToNewProductPage(e.id)} key={i}>
-              <a className={style.item}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img alt="product-img" src={e.images[0] || 'assets/placeholder-image.svg'} className={style.img} />
-                <span>{e.name}</span>
+              <a >
+                <ListItemButton className={style.list} >
+                  <img alt="product-img" src={e.images[0] || 'assets/placeholder-image.svg'} className={style.img} />
+
+                  <div>
+                    <h3>{e.name}</h3>
+                    <p>{e.provider}</p>
+                  </div>
+
+                  <span>Ver más</span>
+                </ListItemButton>
               </a>
             </Link>
           )
