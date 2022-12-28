@@ -105,7 +105,18 @@
           "prop": "ignore"
         }
       ]
-    }
+    },
+    "overrides": [
+      {
+        "files": [
+          "*.d.ts"
+        ],
+        "rules": {
+          "no-undef": "off",
+          "no-use-before-define": "off"
+        }
+      }
+    ]
   },
   "stylelint": {
     "extends": "stylelint-config-standard",

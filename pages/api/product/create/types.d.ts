@@ -1,4 +1,4 @@
-export interface  ReqBody {
+export interface ReqBody {
   images: Array<string>
   code: string
   name: string

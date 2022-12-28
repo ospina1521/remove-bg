@@ -18,7 +18,7 @@ export interface Product {
   name: string
   category: string
   provider: string
-  // 
+  //
   quantityAvailable: string
   priceCost: string
   priceSale: string

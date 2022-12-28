@@ -181,7 +181,7 @@ export const ProfilePage = () => {
         <div style={{ display: 'flex', marginTop: '16px', justifyContent: 'space-evenly' }}>
 
           {user.properties?.rol === 'provider' &&
-            <Link href={routeToReadOnlyPortfolioPage(email)}>
+            <Link href={routeToReadOnlyPortfolioPage(email ?? '')}>
               <a>
                 <Button text='Ver Productos' />
               </a>

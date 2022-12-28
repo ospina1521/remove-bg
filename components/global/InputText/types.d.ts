@@ -1,4 +1,4 @@
-import { InputHTMLAttributes } from "react";
+import { InputHTMLAttributes } from 'react'
 
 export interface Props {
   name: string;
@@ -12,8 +12,8 @@ export interface Props {
   isDisable?: boolean;
   placeholder?: string;
   onSubmit?: () => void;
-  autoComplete?: "off" | "on";
-  type?: "select" | InputHTMLAttributes<HTMLInputElement>["type"];
+  autoComplete?: 'off' | 'on';
+  type?: 'select' | InputHTMLAttributes<HTMLInputElement>['type'];
   onChange?: (value: string, isValid: boolean, keyDown: string) => void;
   selectOptions?: Array<string>;
 }

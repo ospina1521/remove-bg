@@ -1,4 +1,4 @@
-import { UserRol } from "#/types";
+import { UserRol } from '#/types'
 
 export interface IUserService {
   rol: UserRol;
