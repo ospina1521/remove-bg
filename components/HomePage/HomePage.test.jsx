@@ -1,47 +1,44 @@
+import { getToken } from '#/utils/jsonWebToken'
+import { setCookie } from '#/utils/cookies'
 import { cleanup, render, screen } from '@testing-library/react'
-import { afterEach, describe, expect, it } from 'vitest'
+import { beforeEach, describe, expect, it } from 'vitest'
 import { HomePage } from './HomePage'
 
 describe.concurrent('HomePage', () => {
-  afterEach(cleanup)
+  beforeEach(() => {
+    cleanup()
+    const token = getToken({ email: 'manuellondogno132@gmail.com', rol: 'provider' })
 
-  it('should render', () => {
+    setCookie({
+      key: 'token',
+      value: token,
+      days: 1000
+    })
     render(<HomePage/>)
-  })
-
-  it('should render burger menu', () => {
-    render(<HomePage/>)
-    screen.getByTestId('burgerMenu')
   })
 
   it('should render logo', () => {
-    render(<HomePage/>)
     screen.getByTestId('logo')
   })
 
   it('should render soropa title', () => {
-    render(<HomePage/>)
     screen.getByRole('heading', { name: 'SOROPA' })
   })
 
   it('should render CircleAvatar icon', () => {
-    render(<HomePage/>)
     screen.getByTestId('circle-avatar')
   })
 
   it('should render "Nueva Colección" text', () => {
-    render(<HomePage/>)
     screen.getByText('Nueva Colección')
   })
 
   it('should render 2 img of "Nueva Colección"', () => {
-    render(<HomePage/>)
     const arrNewCollection = screen.getAllByTestId('new-collection-image')
     expect(arrNewCollection.length).toBe(2)
   })
 
   it('should render category product titles "Mujer, Hombre, Marcas, Rebajas"', () => {
-    render(<HomePage />)
     screen.getByText('Mujer')
     screen.getByText('Hombre')
     screen.getByText('Marcas')
@@ -49,7 +46,6 @@ describe.concurrent('HomePage', () => {
   })
 
   it('should render 4 img of "Categorías de producto"', () => {
-    render(<HomePage/>)
     const arrCategoryProduct = screen.getAllByTestId('category-products-image')
     expect(arrCategoryProduct.length).toBe(4)
   })
