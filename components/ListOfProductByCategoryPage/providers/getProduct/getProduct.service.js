@@ -9,6 +9,7 @@ export const getProductService = async (props) => {
   }
 
   const url = new URL(location.origin + '/api/product/get-by-criteria')
+  // @ts-ignore
   url.search = new URLSearchParams({ category, provider }).toString()
 
   const resp = await fetch(url, config)
