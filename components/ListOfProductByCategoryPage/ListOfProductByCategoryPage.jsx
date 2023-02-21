@@ -7,6 +7,7 @@ import { BackArrowIcon } from '../global/icons/BackArrow/BackArrow'
 import { Logo } from '../global/Logo/Logo'
 import { useRouter } from 'next/router'
 import { useGetSearchParams } from '#/utils/hooks/useGetSearchParams'
+import { useToken } from '#/utils/hooks/useToken'
 export const routeToListOfProductByCategory = (category = '') => `/list-of-product?category=${category}`
 
 /** @param {import('./types').Props} props */
@@ -19,10 +20,12 @@ export const ListOfProductByCategory = (props) => {
   let { products, getProduct } = useGetProduct()
   products = ENV.isTestMode ? testListProducts : products
 
+  const { email } = useToken()
+
   useEffect(() => {
-    if (!category) return
-    getProduct({ category })
-  }, [category])
+    if (!category && !email) return
+    getProduct({ category, provider: email })
+  }, [category, email])
 
   return (
     <>

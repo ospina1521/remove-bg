@@ -49,9 +49,14 @@ export const HomePage = () => {
         <h1 className={style.name} >SOROPA</h1>
       </div>
 
-      <h2 className={style.textNewCollection}>Nueva Colección</h2>
+      <div style={{
+        height: '100%'
+      }}
+      ></div>
 
-      <div className={style.rowNewCollection}>
+      {/* <h2 className={style.textNewCollection}>Nueva Colección</h2> */}
+
+      {/* <div className={style.rowNewCollection}>
         <Link href={routeToListOfProductByCategory('new-collection')}>
           <a><PlaceholderImage size='m' data-testid='new-collection-image' style={{ borderRadius: '4px' }} /></a>
         </Link>
@@ -59,7 +64,7 @@ export const HomePage = () => {
         <Link href={routeToListOfProductByCategory('new-collection')}>
           <a><PlaceholderImage size='m' data-testid='new-collection-image' style={{ borderRadius: '4px' }} /></a>
         </Link>
-      </div>
+      </div> */}
 
       <div className={style.rowCategories}>
         <Link href={routeToListOfProductByCategory('mujer')}>

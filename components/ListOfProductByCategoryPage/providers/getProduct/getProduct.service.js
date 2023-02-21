@@ -1,6 +1,6 @@
 /** @param {import('./types').ReqGetProduct} props */
 export const getProductService = async (props) => {
-  const { category } = props
+  const { category, provider } = props ?? {}
 
   /** @type {RequestInit} */
   const config = {
@@ -9,7 +9,7 @@ export const getProductService = async (props) => {
   }
 
   const url = new URL(location.origin + '/api/product/get-by-criteria')
-  url.searchParams.set('category', category || '')
+  url.search = new URLSearchParams({ category, provider }).toString()
 
   const resp = await fetch(url, config)
 

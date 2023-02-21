@@ -36,3 +36,7 @@ a {
 .MuiLinearProgress-bar {
   background-color: var(--primary-color) !important;
 }
+
+.MuiSnackbarContent-message {
+  color: #fff;
+}
