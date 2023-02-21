@@ -10,10 +10,9 @@ export const getGetByEmailService = async (props) => {
     }
   }
 
-  const params = new URLSearchParams()
-  params.set('email', email)
+  const url = new URL(`${location.origin}/api/user/get-by-criteria`)
+  url.search = new URLSearchParams({ email }).toString()
 
-  const url = '/api/user/get-by-criteria?' + params.toString()
   const resp = await fetch(url, config)
   /** @type {import("./types").IRespGetAllUsersService} */
   const json = await resp.json()

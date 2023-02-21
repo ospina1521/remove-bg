@@ -1,5 +1,4 @@
 import { ENV } from '#/env'
-import { sendMail } from '#/providers/Mail/Mail'
 import { UserRepositorySupaBase } from '#/repository/UserRepositorySupaBase/UserRepositorySupaBase'
 import { generateCode7D } from '#/utils/generateCode7D'
 import { getToken } from '#/utils/jsonWebToken'
@@ -28,13 +27,13 @@ export const enterEmailBackService = async (email) => {
     5 /** 5 min */ * 60 /** 1 min */ * 1000 /** 1 seg */
   )
 
-  const message = `pega este código <b>${code}</b> de verificación.`
+  // const message = `pega este código <b>${code}</b> de verificación.`
 
-  await sendMail({
-    email,
-    message,
-    subject: `${code} - código de verificación de SOROPA`
-  })
+  // await sendMail({
+  //   email,
+  //   message,
+  //   subject: `${code} - código de verificación de SOROPA`
+  // })
 
   const token = getToken({
     email,

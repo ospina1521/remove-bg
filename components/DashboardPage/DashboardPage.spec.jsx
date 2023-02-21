@@ -3,7 +3,10 @@ import { cleanup, render, screen } from '@testing-library/react'
 import { beforeEach, describe, expect, it } from 'vitest'
 
 describe.concurrent('dashboard', () => {
-  beforeEach(cleanup)
+  beforeEach(() => {
+    location.href = 'http://localhost:3000'
+    cleanup()
+  })
 
   it('should be a function', () => {
     expect(DashboardPage).toBeTypeOf('function')

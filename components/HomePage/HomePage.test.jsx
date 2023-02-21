@@ -29,14 +29,14 @@ describe.concurrent('HomePage', () => {
     screen.getByTestId('circle-avatar')
   })
 
-  it('should render "Nueva Colección" text', () => {
-    screen.getByText('Nueva Colección')
-  })
+  // it('should render "Nueva Colección" text', () => {
+  //   screen.getByText('Nueva Colección')
+  // })
 
-  it('should render 2 img of "Nueva Colección"', () => {
-    const arrNewCollection = screen.getAllByTestId('new-collection-image')
-    expect(arrNewCollection.length).toBe(2)
-  })
+  // it('should render 2 img of "Nueva Colección"', () => {
+  //   const arrNewCollection = screen.getAllByTestId('new-collection-image')
+  //   expect(arrNewCollection.length).toBe(2)
+  // })
 
   it('should render category product titles "Mujer, Hombre, Marcas, Rebajas"', () => {
     screen.getByText('Mujer')

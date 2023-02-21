@@ -10,8 +10,7 @@ export const getGetByEmailService = async (props) => {
     }
   }
 
-  const params = new URLSearchParams()
-  params.set('email', email)
+  const params = new URLSearchParams({ email })
 
   const url = '/api/user/get-by-criteria?' + params.toString()
   const resp = await fetch(url, config)

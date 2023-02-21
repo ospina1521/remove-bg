@@ -10,7 +10,7 @@ export const getAllProvidersService = async () => {
     }
   }
 
-  const url = new URL('/api/user/get-by-criteria', window.location.href)
+  const url = new URL(`${location.origin}/api/user/get-by-criteria`, window.location.href)
   url.searchParams.set('rol', 'provider')
 
   const resp = await fetch(url, config)

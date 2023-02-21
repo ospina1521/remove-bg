@@ -20,7 +20,7 @@ export const ListOfProductByCategory = (props) => {
   let { products, getProduct } = useGetProduct()
   products = ENV.isTestMode ? testListProducts : products
 
-  const { email } = useToken()
+  const { email } = useToken() ?? {}
 
   useEffect(() => {
     if (!category && !email) return

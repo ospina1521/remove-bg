@@ -1,8 +1,10 @@
+import { routeDashboardPage } from '#/components/DashboardPage/DashboardPage'
 import { Button } from '#/components/global/Button/Button'
 import { Header } from '#/components/global/Header/Header'
 import { Loading } from '#/components/global/Loading/Loading'
 import { routeToHomePage } from '#/components/HomePage/HomePage'
 import { setCookie } from '#/utils/cookies'
+import { decodeToken } from '#/utils/jsonWebToken'
 import { Snackbar } from '@mui/material'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
@@ -29,11 +31,13 @@ export const EnterEmailPage = () => {
 
     try {
       const { token } = await enterEmailService(email)
-
+      const { rol } = decodeToken(token)
       setCookie({ key: 'token', value: token, days: 10000 })
 
       // TODO: redirect to home
-      await route.push(routeToHomePage())
+      if (rol === 'admin') await route.push(routeDashboardPage())
+      if (rol === 'provider') await route.push(routeToHomePage())
+
       setIsLoading(false)
     } catch (error) {
       setIsLoading(false)

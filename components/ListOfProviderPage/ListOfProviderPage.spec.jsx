@@ -3,7 +3,10 @@ import { describe, it, expect, beforeEach } from 'vitest'
 import { ListOfProviderPage } from './ListOfProviderPage'
 
 describe.concurrent('ListOfProviderPage', () => {
-  beforeEach(cleanup)
+  beforeEach(() => {
+    location.href = 'http://localhost:3000'
+    cleanup()
+  })
 
   it('should be a function', () => {
     expect(ListOfProviderPage).toBeTypeOf('function')
