@@ -97,7 +97,7 @@ export function DashboardPage (props) {
   return (
     <div className='mainBox'>
 
-      <Header burgerMenuEnable={true} arrowBackEnable={true} />
+      <Header burgerMenuEnable={true} arrowBackEnable={false} />
 
       <div className={style.body}>
 
